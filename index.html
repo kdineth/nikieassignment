@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nike Pegasus 41 | Run Your Way</title>
+    <title>Nike Pegasus 41 | Run Your Way (UK)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,13 +29,17 @@
         .drawer { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .drawer-open { transform: translateX(0); }
         .drawer-closed { transform: translateX(100%); }
+
+        /* Spinner */
+        .loader { border: 2px solid #f3f3f3; border-top: 2px solid #000; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="bg-white text-black antialiased selection:bg-nike-volt selection:text-black">
 
     <!-- Top Banner -->
     <div class="bg-gray-100 text-[11px] font-bold text-center py-2 uppercase tracking-wider cursor-pointer hover:underline">
-        Join the 30-Day Challenge & Get 20% Off Your First Pair
+        Free Delivery & Returns for Members | <span class="underline">Join Now</span>
     </div>
 
     <!-- Navigation -->
@@ -91,7 +95,7 @@
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">Fly.</span>
             </h1>
             <p class="max-w-xl text-lg md:text-xl font-medium text-gray-200 mb-10 leading-relaxed">
-                Featuring ReactX foam for 13% more energy return. The world's most trusted daily driver, re-engineered for the Colombo heat.
+                Featuring ReactX foam for 13% more energy return. The world's most trusted daily driver, re-engineered for the unpredictable British weather.
             </p>
             <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
                 <button onclick="document.getElementById('product').scrollIntoView()" class="bg-white text-black px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-200 transition text-center">
@@ -108,23 +112,42 @@
     <section id="product" class="max-w-[1440px] mx-auto pt-12 md:pt-24 pb-24 px-4 md:px-12">
         <div class="flex flex-col lg:flex-row gap-12 lg:gap-20">
             
-            <!-- Sticky Product Gallery (Left) -->
-            <div class="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-4 h-fit">
-                <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=1664&auto=format&fit=crop" class="w-full h-auto rounded-xl bg-gray-100 object-cover hover:scale-[1.02] transition duration-500 cursor-zoom-in" alt="Side View">
-                <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=1587&auto=format&fit=crop" class="w-full h-auto rounded-xl bg-gray-100 object-cover hover:scale-[1.02] transition duration-500 cursor-zoom-in" alt="Top View">
-                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2670&auto=format&fit=crop" class="w-full h-auto rounded-xl bg-gray-100 object-cover hover:scale-[1.02] transition duration-500 cursor-zoom-in col-span-1 md:col-span-2" alt="Lifestyle">
+            <!-- Product Gallery (Left) with Captions -->
+            <div class="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-8 h-fit">
+                
+                <div class="group">
+                    <div class="overflow-hidden rounded-xl bg-gray-100 mb-3">
+                        <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=1664&auto=format&fit=crop" class="w-full h-auto object-cover hover:scale-[1.02] transition duration-500 cursor-zoom-in" alt="Side View">
+                    </div>
+                    <p class="text-sm font-medium text-gray-500">Aerodynamic profile designed for reduced drag on the road.</p>
+                </div>
+
+                <div class="group">
+                    <div class="overflow-hidden rounded-xl bg-gray-100 mb-3">
+                        <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=1587&auto=format&fit=crop" class="w-full h-auto object-cover hover:scale-[1.02] transition duration-500 cursor-zoom-in" alt="Top View">
+                    </div>
+                    <p class="text-sm font-medium text-gray-500">Engineered breathable mesh upper keeps feet cool during long runs.</p>
+                </div>
+
+                <div class="col-span-1 md:col-span-2 group">
+                    <div class="overflow-hidden rounded-xl bg-gray-100 mb-3">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2670&auto=format&fit=crop" class="w-full h-auto object-cover hover:scale-[1.02] transition duration-500 cursor-zoom-in" alt="Lifestyle">
+                    </div>
+                    <p class="text-sm font-medium text-gray-500">Versatile style that transitions seamlessly from track to street.</p>
+                </div>
+
             </div>
 
             <!-- Product Details (Right - Sticky) -->
             <div class="lg:w-1/3 lg:sticky lg:top-24 h-fit">
                 <h1 class="text-3xl md:text-5xl font-black font-nike mb-2 uppercase tracking-tight">Nike Pegasus 41</h1>
                 <p class="text-gray-500 font-medium mb-4">Men's Road Running Shoes</p>
-                <div class="text-2xl font-medium mb-8">LKR 42,500</div>
+                <div class="text-2xl font-medium mb-8">£119.95</div>
 
                 <!-- Size Selector -->
                 <div class="mb-8">
                     <div class="flex justify-between mb-4">
-                        <span class="font-bold">Select Size</span>
+                        <span class="font-bold">Select Size (UK)</span>
                         <span class="text-gray-500 hover:text-black cursor-pointer">Size Guide</span>
                     </div>
                     <div class="grid grid-cols-3 gap-2">
@@ -143,16 +166,16 @@
                     Add to Bag
                 </button>
                 <button class="w-full border border-gray-300 py-6 rounded-full font-bold text-lg hover:border-black transition flex items-center justify-center gap-2">
-                    Favorite <i data-lucide="heart" class="w-5 h-5"></i>
+                    Favourite <i data-lucide="heart" class="w-5 h-5"></i>
                 </button>
 
                 <!-- Benefits -->
                 <div class="mt-12 space-y-6 border-t pt-8">
                     <div class="group cursor-pointer">
                         <h3 class="font-bold text-lg flex justify-between items-center">
-                            Shipping & Delivery <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                            Delivery & Returns <i data-lucide="chevron-down" class="w-5 h-5"></i>
                         </h3>
-                        <p class="text-gray-500 text-sm mt-2 hidden group-hover:block">Free delivery on orders over LKR 25,000. Arrives in 3-5 business days.</p>
+                        <p class="text-gray-500 text-sm mt-2 hidden group-hover:block">Free standard delivery for Nike Members. Returns accepted within 30 days.</p>
                     </div>
                     <div class="group cursor-pointer border-t pt-6">
                         <h3 class="font-bold text-lg flex justify-between items-center">
@@ -173,12 +196,12 @@
         <div class="max-w-7xl mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center gap-16">
             
             <div class="md:w-1/2">
-                <span class="bg-nike-volt text-black font-bold text-xs px-3 py-1 rounded uppercase mb-6 inline-block">Official Campaign</span>
+                <span class="bg-nike-volt text-black font-bold text-xs px-3 py-1 rounded uppercase mb-6 inline-block">Official UK Campaign</span>
                 <h2 class="text-5xl md:text-8xl font-black font-nike uppercase leading-none mb-6">
                     30 Days.<br>50 KM.<br><span class="text-nike-volt">Legendary.</span>
                 </h2>
                 <p class="text-gray-400 text-lg mb-8 max-w-md">
-                    Join the Nike Sri Lanka community on Strava. Run 50km in 30 days wearing any Nike shoe and unlock an exclusive 20% discount on the Pegasus 41.
+                    Join the Nike UK community on Strava. Run 50km in 30 days wearing any Nike shoe and unlock an exclusive 20% discount on the Pegasus 41.
                 </p>
                 
                 <!-- Countdown -->
@@ -226,7 +249,7 @@
                         <div class="w-1/6 bg-gray-700 h-[60%] rounded-t"></div>
                         <div class="w-1/6 bg-gray-700 h-[45%] rounded-t"></div>
                     </div>
-                    <p class="text-sm text-gray-400">Join <span class="text-white font-bold">12,405 runners</span> in Colombo currently participating.</p>
+                    <p class="text-sm text-gray-400">Join <span class="text-white font-bold">12,405 runners</span> in London currently participating.</p>
                 </div>
                 <!-- Decorative Circle -->
                 <div class="absolute -bottom-10 -left-10 w-full h-full border-2 border-dashed border-gray-700 rounded-3xl -z-0"></div>
@@ -273,7 +296,7 @@
         <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between items-end border-t border-gray-900 pt-8">
             <div class="flex items-center gap-2 mb-4 md:mb-0">
                 <i data-lucide="map-pin" class="w-4 h-4 text-white"></i>
-                <span class="text-xs font-bold text-white">Sri Lanka</span>
+                <span class="text-xs font-bold text-white">United Kingdom</span>
                 <span class="text-xs text-gray-500 ml-4">© 2026 Nike, Inc. All Rights Reserved.</span>
             </div>
             <div class="flex gap-6">
@@ -291,9 +314,13 @@
             <h2 class="text-xl font-black font-nike uppercase">Your Bag</h2>
             <button onclick="toggleCart()" class="p-2 hover:bg-gray-200 rounded-full"><i data-lucide="x" class="w-6 h-6"></i></button>
         </div>
+        
+        <!-- Empty State -->
         <div class="flex-1 p-6 flex flex-col items-center justify-center text-center" id="empty-cart">
             <p class="text-gray-500 font-medium">Your bag is empty.</p>
         </div>
+
+        <!-- Cart Items (Initially Hidden) -->
         <div class="hidden flex-1 p-6" id="cart-items">
             <div class="flex gap-4 mb-6">
                 <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=200&auto=format&fit=crop" class="w-20 h-20 rounded object-cover">
@@ -301,16 +328,51 @@
                     <h4 class="font-bold">Nike Pegasus 41</h4>
                     <p class="text-gray-500 text-sm">Men's Road Running Shoes</p>
                     <p class="text-sm font-bold mt-1" id="cart-size">Size: UK 9</p>
-                    <p class="mt-2 font-bold">LKR 42,500</p>
+                    <p class="mt-2 font-bold">£119.95</p>
                 </div>
             </div>
         </div>
-        <div class="p-6 border-t bg-gray-50">
+
+        <!-- Checkout View (Initially Hidden) -->
+        <div class="hidden flex-1 p-6 flex flex-col" id="checkout-view">
+            <h3 class="font-black font-nike uppercase text-lg mb-4">Secure Checkout</h3>
+            <p class="text-sm text-gray-500 mb-6">Enter your email to receive your receipt and order confirmation.</p>
+            
+            <form onsubmit="processPayment(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase mb-1">Email Address</label>
+                    <input type="email" id="email-input" required placeholder="name@example.com" class="w-full border p-3 rounded-lg focus:ring-2 focus:ring-black outline-none text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase mb-1">Card Details (Demo)</label>
+                    <div class="border p-3 rounded-lg bg-gray-50 flex items-center justify-between text-gray-400 text-sm">
+                        <span>•••• •••• •••• 4242</span>
+                        <i data-lucide="credit-card" class="w-4 h-4"></i>
+                    </div>
+                </div>
+                <button type="submit" id="pay-btn" class="w-full bg-black text-white py-4 rounded-full font-bold uppercase hover:bg-gray-800 transition mt-4 flex justify-center items-center">
+                    Pay £119.95
+                </button>
+            </form>
+        </div>
+
+        <!-- Success View (Initially Hidden) -->
+        <div class="hidden flex-1 p-6 flex flex-col items-center justify-center text-center animate-[fadeIn_0.5s]" id="success-view">
+            <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-6">
+                <i data-lucide="check" class="text-white w-8 h-8"></i>
+            </div>
+            <h3 class="font-black font-nike uppercase text-2xl mb-2">Payment Complete</h3>
+            <p class="text-gray-500 mb-6">Receipt sent to <span id="confirmed-email" class="font-bold text-black"></span></p>
+            <button onclick="toggleCart()" class="text-sm font-bold underline">Continue Shopping</button>
+        </div>
+
+        <!-- Cart Footer (Subtotal & Checkout Btn) -->
+        <div class="p-6 border-t bg-gray-50" id="cart-footer">
             <div class="flex justify-between mb-4 text-lg font-bold">
                 <span>Subtotal</span>
-                <span id="subtotal">LKR 0</span>
+                <span id="subtotal">£0.00</span>
             </div>
-            <button class="w-full bg-black text-white py-4 rounded-full font-bold uppercase hover:bg-gray-800 transition" onclick="alert('Checkout Mockup Initiated')">Checkout</button>
+            <button class="w-full bg-black text-white py-4 rounded-full font-bold uppercase hover:bg-gray-800 transition" onclick="proceedToCheckout()">Checkout</button>
         </div>
     </div>
     
@@ -324,12 +386,10 @@
 
         // Size Selection Logic
         function selectSize(btn) {
-            // Remove active class from all
             document.querySelectorAll('.size-btn').forEach(b => {
                 b.classList.remove('border-black', 'bg-black', 'text-white');
                 b.classList.add('border-gray-200');
             });
-            // Add active class
             btn.classList.remove('border-gray-200');
             btn.classList.add('border-black', 'bg-black', 'text-white');
             selectedSize = btn.innerText;
@@ -343,16 +403,14 @@
                 return;
             }
 
-            // Update Badge
             const badge = document.getElementById('cart-badge');
             badge.innerText = "1";
             badge.classList.remove('opacity-0');
 
-            // Open Drawer with Item
             document.getElementById('empty-cart').classList.add('hidden');
             document.getElementById('cart-items').classList.remove('hidden');
             document.getElementById('cart-size').innerText = `Size: ${selectedSize}`;
-            document.getElementById('subtotal').innerText = "LKR 42,500";
+            document.getElementById('subtotal').innerText = "£119.95";
             
             toggleCart(true);
         }
@@ -373,11 +431,36 @@
             }
         }
 
+        // Switch to Checkout View
+        function proceedToCheckout() {
+            document.getElementById('cart-items').classList.add('hidden');
+            document.getElementById('cart-footer').classList.add('hidden');
+            document.getElementById('checkout-view').classList.remove('hidden');
+        }
+
+        // Handle Fake Payment
+        function processPayment(e) {
+            e.preventDefault();
+            const email = document.getElementById('email-input').value;
+            const btn = document.getElementById('pay-btn');
+            
+            // Loading State
+            btn.innerHTML = '<div class="loader"></div>';
+            
+            setTimeout(() => {
+                document.getElementById('checkout-view').classList.add('hidden');
+                document.getElementById('success-view').classList.remove('hidden');
+                document.getElementById('confirmed-email').innerText = email;
+                
+                // Reset Cart
+                document.getElementById('cart-badge').classList.add('opacity-0');
+            }, 2000);
+        }
+
         // Join Challenge Form
         function joinChallenge(e) {
             e.preventDefault();
             const btn = e.target.querySelector('button');
-            const originalText = btn.innerText;
             
             btn.innerText = "Processing...";
             btn.disabled = true;
