@@ -214,9 +214,13 @@
                         <div class="text-3xl font-black font-mono text-white" id="hours">08</div>
                         <div class="text-[10px] uppercase text-gray-500 font-bold tracking-wider">Hours</div>
                     </div>
-                    <div class="bg-gray-900 p-4 rounded-lg text-center w-24 border border-gray-800 shadow-[0_0_15px_rgba(210,242,53,0.3)]">
-                        <div class="text-3xl font-black font-mono text-nike-volt" id="minutes">45</div>
+                    <div class="bg-gray-900 p-4 rounded-lg text-center w-24 border border-gray-800">
+                        <div class="text-3xl font-black font-mono text-white" id="minutes">45</div>
                         <div class="text-[10px] uppercase text-gray-500 font-bold tracking-wider">Mins</div>
+                    </div>
+                    <div class="bg-gray-900 p-4 rounded-lg text-center w-24 border border-gray-800 shadow-[0_0_15px_rgba(210,242,53,0.3)]">
+                        <div class="text-3xl font-black font-mono text-nike-volt" id="seconds">00</div>
+                        <div class="text-[10px] uppercase text-gray-500 font-bold tracking-wider">Secs</div>
                     </div>
                 </div>
 
@@ -486,10 +490,12 @@
                 const d = Math.floor(diff / (1000 * 60 * 60 * 24));
                 const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((diff % (1000 * 60)) / 1000);
 
                 document.getElementById('days').innerText = d < 10 ? '0' + d : d;
                 document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
                 document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
+                document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
             }
             setInterval(update, 1000);
             update();
