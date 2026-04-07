@@ -23,6 +23,8 @@
         .drawer-closed { transform: translateX(100%); }
         .loader { border: 2px solid #f3f3f3; border-top: 2px solid #000; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        /* Bot Window Transitions */
         #bot-window { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .bot-hidden { opacity: 0; transform: translateY(20px) scale(0.95); pointer-events: none; }
         .bot-visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
@@ -102,21 +104,31 @@
         <div class="flex flex-col lg:flex-row gap-12 lg:gap-20">
             
             <div class="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-8 h-fit">
+                
                 <div class="group">
-                    <div class="overflow-hidden rounded-xl bg-gray-100 mb-3">
-                        <img src="./test1.jpg" class="w-full h-auto object-cover hover:scale-[1.02] transition duration-500 cursor-zoom-in" alt="Side View">
+                    <div class="overflow-hidden rounded-xl bg-gray-100 mb-3 aspect-[4/5] flex items-center justify-center p-4">
+                        <img src="./test1.jpg" class="w-full h-full object-contain hover:scale-[1.05] transition duration-500 cursor-zoom-in" alt="Side View">
                     </div>
                     <p class="text-sm font-medium text-gray-500">Aerodynamic profile designed for reduced drag on the road.</p>
                 </div>
+
                 <div class="group">
-                    <div class="overflow-hidden rounded-xl bg-gray-100 mb-3">
-                        <img src="./test2.jpg" class="w-full h-auto object-cover hover:scale-[1.02] transition duration-500 cursor-zoom-in" alt="Top View">
+                    <div class="overflow-hidden rounded-xl bg-gray-100 mb-3 aspect-[4/5] flex items-center justify-center p-4">
+                        <img src="./test2.jpg" class="w-full h-full object-contain hover:scale-[1.05] transition duration-500 cursor-zoom-in" alt="Top View">
                     </div>
                     <p class="text-sm font-medium text-gray-500">Engineered breathable mesh upper keeps feet cool during long runs.</p>
                 </div>
-                <div class="col-span-1 md:col-span-2 group">
-                    <div class="overflow-hidden rounded-xl bg-gray-100 mb-3 relative pb-[56.25%] h-0">
-                        <iframe src="https://www.youtube.com/embed/iwY8tJ5ige4" class="absolute top-0 left-0 w-full h-full" title="Lace up in the Nike Pegasus 41 GORE-TEX" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                <div class="group">
+                    <div class="overflow-hidden rounded-xl bg-gray-100 mb-3 aspect-[4/5] flex items-center justify-center p-4">
+                        <img src="./shoe3.webp" class="w-full h-full object-contain hover:scale-[1.05] transition duration-500 cursor-zoom-in" alt="Alternative View">
+                    </div>
+                    <p class="text-sm font-medium text-gray-500">Dynamic cushioning ensures energy return in every step.</p>
+                </div>
+
+                <div class="group">
+                    <div class="overflow-hidden rounded-xl bg-gray-100 mb-3 relative aspect-[4/5] h-0">
+                        <iframe src="https://www.youtube.com/embed/iwY8tJ5ige4" class="absolute top-0 left-0 w-full h-full rounded-xl" title="Lace up in the Nike Pegasus 41 GORE-TEX" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                     <p class="text-sm font-medium text-gray-500">See the Pegasus 41 GORE-TEX in action.</p>
                 </div>
@@ -129,10 +141,13 @@
 
                 <div class="mb-8">
                     <span class="font-bold block mb-4">Select Color</span>
-                    <div class="flex gap-4">
+                    <div class="flex flex-wrap gap-4">
                         <button class="color-btn w-10 h-10 rounded-full bg-nike-volt border-2 border-transparent hover:border-black transition ring-offset-2 focus:ring-2 focus:ring-black focus:border-black" onclick="selectColor(this)"></button>
                         <button class="color-btn w-10 h-10 rounded-full bg-black border-2 border-transparent hover:border-black transition ring-offset-2 focus:ring-2 focus:ring-black focus:border-black" onclick="selectColor(this)"></button>
                         <button class="color-btn w-10 h-10 rounded-full bg-white border-2 border-gray-200 hover:border-black transition ring-offset-2 focus:ring-2 focus:ring-black focus:border-black" onclick="selectColor(this)"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-gray-400 border-2 border-transparent hover:border-black transition ring-offset-2 focus:ring-2 focus:ring-black focus:border-black" onclick="selectColor(this)"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-blue-600 border-2 border-transparent hover:border-black transition ring-offset-2 focus:ring-2 focus:ring-black focus:border-black" onclick="selectColor(this)"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-red-600 border-2 border-transparent hover:border-black transition ring-offset-2 focus:ring-2 focus:ring-black focus:border-black" onclick="selectColor(this)"></button>
                     </div>
                 </div>
 
@@ -150,16 +165,6 @@
                         <button class="size-btn border rounded-md py-3 hover:border-black font-medium transition focus:border-black focus:bg-black focus:text-white" onclick="selectSize(this)">UK 11</button>
                     </div>
                     <p id="size-error" class="text-red-600 text-sm mt-2 hidden font-medium">Please select a size.</p>
-                </div>
-
-                <div class="mb-8 p-4 bg-gray-50 rounded-xl border border-gray-200 flex items-center gap-4 relative overflow-hidden group hover:border-black transition">
-                    <div class="absolute right-0 top-0 bottom-0 w-2 bg-nike-volt"></div>
-                    <img src="./sunglass.jpg" alt="Free Nike Running Glasses" class="w-16 h-16 object-cover rounded shadow-sm border border-gray-100 group-hover:scale-105 transition duration-300">
-                    <div>
-                        <span class="inline-block bg-black text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded-sm mb-1">Free Gift</span>
-                        <p class="font-bold text-sm text-gray-900 leading-none mb-1">Nike Running Glasses</p>
-                        <p class="text-xs text-gray-500">Included complimentary with this purchase.</p>
-                    </div>
                 </div>
 
                 <button onclick="addToCart()" class="w-full bg-black text-white py-6 rounded-full font-bold text-lg hover:bg-gray-800 transition transform active:scale-95 mb-4">
@@ -206,10 +211,6 @@
                     <div class="bg-gray-900 p-4 rounded-lg text-center w-24 border border-gray-800">
                         <div class="text-3xl font-black font-mono text-white" id="hours">08</div>
                         <div class="text-[10px] uppercase text-gray-500 font-bold tracking-wider">Hours</div>
-                    </div>
-                    <div class="bg-gray-900 p-4 rounded-lg text-center w-24 border border-gray-800">
-                        <div class="text-3xl font-black font-mono text-white" id="minutes">45</div>
-                        <div class="text-[10px] uppercase text-gray-500 font-bold tracking-wider">Mins</div>
                     </div>
                     <div class="bg-gray-900 p-4 rounded-lg text-center w-24 border border-gray-800 shadow-[0_0_15px_rgba(210,242,53,0.3)]">
                         <div class="text-3xl font-black font-mono text-nike-volt" id="seconds">00</div>
@@ -355,7 +356,7 @@
             </div>
             <div id="chat-messages" class="flex-1 p-4 bg-white overflow-y-auto space-y-4 no-scrollbar">
                 <div class="bg-gray-100 text-black text-[13px] p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] animate-msg">
-                    Hi there! 👋 I'm your automated Nike assistant. How can I help you today?
+                    Hi there! 👋 I'm your automated Nike assistant. How can I help you reach your goals today?
                 </div>
             </div>
             <div class="p-4 border-t bg-gray-50 grid grid-cols-2 gap-2">
@@ -377,7 +378,6 @@
         lucide.createIcons();
         let selectedSize = null;
 
-        // Size & Color Logic
         function selectSize(btn) {
             document.querySelectorAll('.size-btn').forEach(b => {
                 b.classList.remove('border-black', 'bg-black', 'text-white');
@@ -388,7 +388,6 @@
             document.getElementById('size-error').classList.add('hidden');
         }
 
-        // ADDED: Color selection visual logic
         function selectColor(btn) {
             document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('ring-2', 'ring-black', 'border-black'));
             btn.classList.add('ring-2', 'ring-black', 'border-black');
