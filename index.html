@@ -16,20 +16,27 @@
         .text-nike-volt { color: #D2F235; }
         .hover-bg-nike-volt:hover { background-color: #bce020; }
         html { scroll-behavior: smooth; }
+        
+        /* Custom Scrollable Gallery Logic */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .snap-x { scroll-snap-type: x mandatory; }
+        .snap-center { scroll-snap-align: center; }
+
+        /* Component Transitions */
         .drawer { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .drawer-open { transform: translateX(0); }
         .drawer-closed { transform: translateX(100%); }
-        .loader { border: 2px solid #f3f3f3; border-top: 2px solid #000; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
-        /* Bot Window Transitions */
         #bot-window { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .bot-hidden { opacity: 0; transform: translateY(20px) scale(0.95); pointer-events: none; }
         .bot-visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
-        @keyframes fadeInBot { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-msg { animation: fadeInBot 0.4s ease-out forwards; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-msg { animation: fadeIn 0.4s ease-out forwards; }
+        
+        .loader { border: 2px solid #f3f3f3; border-top: 2px solid #000; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="bg-white text-black antialiased selection:bg-nike-volt selection:text-black">
@@ -41,61 +48,35 @@
     <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100 transition-all duration-300" id="navbar">
         <div class="max-w-[1920px] mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
             <a href="#" class="hover:opacity-60 transition">
-                <svg class="h-6 md:h-8 w-auto" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M21 8.25c-8.5-3.5-12.5 1.5-16 6.5C8 18 13 18.5 21 8.25z" fill="black"/> 
-                    <path d="M22.54 7.66c-4.27-2.73-10.45-1.99-13.62 1.94-3.6 4.47-3.9 9.8 1.45 8.35 4.09-1.11 8.7-5.07 12.17-10.29z" fill="black"/>
-                </svg>
+                <svg class="h-6 md:h-8 w-auto" viewBox="0 0 24 24" fill="currentColor"><path d="M21 8.25c-8.5-3.5-12.5 1.5-16 6.5C8 18 13 18.5 21 8.25z"/><path d="M22.54 7.66c-4.27-2.73-10.45-1.99-13.62 1.94-3.6 4.47-3.9 9.8 1.45 8.35 4.09-1.11 8.7-5.07 12.17-10.29z"/></svg>
             </a>
 
             <div class="hidden lg:flex absolute left-1/2 transform -translate-x-1/2 space-x-8 font-bold text-sm items-center">
                 <a href="#" class="hover:text-gray-500 transition">New & Featured</a>
                 <a href="#" class="hover:text-gray-500 transition">Men</a>
                 <a href="#" class="hover:text-gray-500 transition">Women</a>
-                <a href="#campaign" class="text-red-600 hover:text-red-800 transition">30-Day Challenge</a>
-                <a href="nikepegasusblog.html" class="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition shadow-sm">Blog Post</a>
+                <a href="#campaign" class="text-red-600 hover:text-red-800 transition font-bold">30-Day Challenge</a>
             </div>
 
             <div class="flex items-center space-x-2 md:space-x-6">
-                <div class="hidden md:flex bg-gray-100 rounded-full px-3 py-2 items-center w-40 hover:bg-gray-200 transition">
-                    <i data-lucide="search" class="w-5 h-5 text-gray-800"></i>
-                    <input type="text" placeholder="Search" class="bg-transparent border-none outline-none text-xs ml-2 font-bold w-full placeholder-gray-500">
-                </div>
-                <button class="hover:bg-gray-100 p-2 rounded-full"><i data-lucide="heart" class="w-6 h-6"></i></button>
+                <button class="hover:bg-gray-100 p-2 rounded-full"><i data-lucide="search" class="w-6 h-6"></i></button>
                 <button class="hover:bg-gray-100 p-2 rounded-full relative" onclick="toggleCart()">
                     <i data-lucide="shopping-bag" class="w-6 h-6"></i>
                     <span id="cart-badge" class="absolute top-0 right-0 bg-black text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold opacity-0 transition-opacity">0</span>
-                </button>
-                <a href="nikepegasusblog.html" class="lg:hidden bg-black text-white px-3 py-2 rounded-md text-xs font-bold hover:bg-gray-800 transition shadow-sm whitespace-nowrap">Blog Post</a>
-                <button class="lg:hidden hover:bg-gray-100 p-2 rounded-full" onclick="alert('Mobile menu would open here.')">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
                 </button>
             </div>
         </div>
     </nav>
 
-    <section class="relative w-full h-[90vh] bg-black text-white overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2670&auto=format&fit=crop" 
-             alt="Nike Pegasus 41 Hero" 
-             class="absolute inset-0 w-full h-full object-cover object-center opacity-80 scale-105 animate-[pulse_10s_ease-in-out_infinite]">
-        
+    <section class="relative w-full h-[85vh] bg-black text-white overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2670" alt="Nike Pegasus 41 Hero" class="absolute inset-0 w-full h-full object-cover opacity-80 animate-[pulse_10s_ease-in-out_infinite]">
         <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
-
         <div class="absolute bottom-0 left-0 w-full p-8 md:p-16 flex flex-col items-start max-w-[1920px] mx-auto">
-            <p class="text-nike-volt font-bold text-sm md:text-base uppercase tracking-widest mb-4 animate-[fadeIn_1s_ease-out]">The All-New Pegasus 41</p>
-            <h1 class="text-6xl md:text-9xl font-black uppercase font-nike leading-[0.9] mb-6 drop-shadow-lg">
-                Don't Just Run.<br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">Fly.</span>
-            </h1>
-            <p class="max-w-xl text-lg md:text-xl font-medium text-gray-200 mb-10 leading-relaxed">
-                Featuring ReactX foam for 13% more energy return. The world's most trusted daily driver, re-engineered for the unpredictable British weather.
-            </p>
+            <p class="text-nike-volt font-bold text-sm md:text-base uppercase tracking-widest mb-4">Official UK Launch</p>
+            <h1 class="text-6xl md:text-9xl font-black uppercase font-nike leading-[0.9] mb-6 drop-shadow-lg">Don't Just Run.<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">Fly.</span></h1>
             <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto">
-                <button onclick="document.getElementById('product').scrollIntoView()" class="bg-white text-black px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-200 transition text-center">
-                    Shop Pegasus 41
-                </button>
-                <button onclick="document.getElementById('campaign').scrollIntoView()" class="bg-nike-volt text-black px-8 py-4 rounded-full font-bold text-lg hover-bg-nike-volt transition text-center">
-                    Join The Challenge
-                </button>
+                <button onclick="document.getElementById('product').scrollIntoView()" class="bg-white text-black px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-200 transition text-center">Shop Pegasus 41</button>
+                <button onclick="document.getElementById('campaign').scrollIntoView()" class="bg-nike-volt text-black px-8 py-4 rounded-full font-bold text-lg hover-bg-nike-volt transition text-center">Join Challenge</button>
             </div>
         </div>
     </section>
@@ -103,409 +84,182 @@
     <section id="product" class="max-w-[1440px] mx-auto pt-12 md:pt-24 pb-24 px-4 md:px-12">
         <div class="flex flex-col lg:flex-row gap-12 lg:gap-20">
             
-            <div class="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-8 h-fit">
-                
-                <div class="group">
-                    <div class="overflow-hidden rounded-xl bg-gray-100 mb-3 aspect-[4/5] flex items-center justify-center p-4">
-                        <img src="./test1.jpg" class="w-full h-full object-contain hover:scale-[1.05] transition duration-500 cursor-zoom-in" alt="Side View">
+            <div class="lg:w-2/3 relative group">
+                <div id="image-carousel" class="flex overflow-x-auto snap-x no-scrollbar rounded-2xl border border-gray-100 shadow-2xl bg-[#F8F8F8] aspect-square">
+                    <div class="min-w-full h-full snap-center flex items-center justify-center p-8">
+                        <img src="./test1.jpg" class="w-full h-full object-contain mix-blend-multiply transition-transform duration-500 hover:scale-105">
                     </div>
-                    <p class="text-sm font-medium text-gray-500">Aerodynamic profile designed for reduced drag on the road.</p>
+                    <div class="min-w-full h-full snap-center flex items-center justify-center p-8">
+                        <img src="./test2.jpg" class="w-full h-full object-contain mix-blend-multiply">
+                    </div>
+                    <div class="min-w-full h-full snap-center flex items-center justify-center p-8">
+                        <img src="./shoe3.webp" class="w-full h-full object-contain mix-blend-multiply">
+                    </div>
                 </div>
 
-                <div class="group">
-                    <div class="overflow-hidden rounded-xl bg-gray-100 mb-3 aspect-[4/5] flex items-center justify-center p-4">
-                        <img src="./test2.jpg" class="w-full h-full object-contain hover:scale-[1.05] transition duration-500 cursor-zoom-in" alt="Top View">
-                    </div>
-                    <p class="text-sm font-medium text-gray-500">Engineered breathable mesh upper keeps feet cool during long runs.</p>
-                </div>
+                <button onclick="scrollGallery(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition"><i data-lucide="chevron-left"></i></button>
+                <button onclick="scrollGallery(1)" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition"><i data-lucide="chevron-right"></i></button>
 
-                <div class="group">
-                    <div class="overflow-hidden rounded-xl bg-gray-100 mb-3 aspect-[4/5] flex items-center justify-center p-4">
-                        <img src="./shoe3.webp" class="w-full h-full object-contain hover:scale-[1.05] transition duration-500 cursor-zoom-in" alt="Alternative View">
-                    </div>
-                    <p class="text-sm font-medium text-gray-500">Dynamic cushioning ensures energy return in every step.</p>
-                </div>
-
-                <div class="group">
-                    <div class="overflow-hidden rounded-xl bg-gray-100 mb-3 relative aspect-[4/5] h-0">
-                        <iframe src="https://www.youtube.com/embed/iwY8tJ5ige4" class="absolute top-0 left-0 w-full h-full rounded-xl" title="Lace up in the Nike Pegasus 41 GORE-TEX" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                    <p class="text-sm font-medium text-gray-500">See the Pegasus 41 GORE-TEX in action.</p>
+                <div class="flex justify-center gap-2 mt-6">
+                    <div class="w-6 h-1 rounded-full bg-black transition-all" id="dot-0"></div>
+                    <div class="w-2 h-1 rounded-full bg-gray-300 transition-all" id="dot-1"></div>
+                    <div class="w-2 h-1 rounded-full bg-gray-300 transition-all" id="dot-2"></div>
                 </div>
             </div>
 
             <div class="lg:w-1/3 lg:sticky lg:top-24 h-fit">
-                <h1 class="text-3xl md:text-5xl font-black font-nike mb-2 uppercase tracking-tight">Nike Pegasus 41</h1>
-                <p class="text-gray-500 font-medium mb-4">Men's Road Running Shoes</p>
-                <div class="text-2xl font-medium mb-8">£119.95</div>
+                <div class="mb-6">
+                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Nike Official</h3>
+                    <h1 class="text-4xl font-black font-nike mb-2 uppercase">Nike Pegasus 41</h1>
+                    <div class="text-2xl font-medium pt-1">£119.95</div>
+                </div>
 
                 <div class="mb-8">
                     <span class="font-bold block mb-4">Select Color</span>
                     <div class="flex flex-wrap gap-4">
-                        <button class="color-btn w-10 h-10 rounded-full bg-nike-volt border-2 border-transparent hover:border-black transition ring-offset-2 focus:ring-2 focus:ring-black focus:border-black" onclick="selectColor(this)"></button>
-                        <button class="color-btn w-10 h-10 rounded-full bg-black border-2 border-transparent hover:border-black transition ring-offset-2 focus:ring-2 focus:ring-black focus:border-black" onclick="selectColor(this)"></button>
-                        <button class="color-btn w-10 h-10 rounded-full bg-white border-2 border-gray-200 hover:border-black transition ring-offset-2 focus:ring-2 focus:ring-black focus:border-black" onclick="selectColor(this)"></button>
-                        <button class="color-btn w-10 h-10 rounded-full bg-gray-400 border-2 border-transparent hover:border-black transition ring-offset-2 focus:ring-2 focus:ring-black focus:border-black" onclick="selectColor(this)"></button>
-                        <button class="color-btn w-10 h-10 rounded-full bg-blue-600 border-2 border-transparent hover:border-black transition ring-offset-2 focus:ring-2 focus:ring-black focus:border-black" onclick="selectColor(this)"></button>
-                        <button class="color-btn w-10 h-10 rounded-full bg-red-600 border-2 border-transparent hover:border-black transition ring-offset-2 focus:ring-2 focus:ring-black focus:border-black" onclick="selectColor(this)"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-nike-volt border-2 border-transparent ring-offset-2 ring-2 ring-black" onclick="selectColor(this)"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-black border-2 border-transparent ring-offset-2 hover:ring-2 hover:ring-gray-300" onclick="selectColor(this)"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-white border-2 border-gray-200 ring-offset-2 hover:ring-2 hover:ring-gray-300" onclick="selectColor(this)"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-gray-400 border-2 border-transparent ring-offset-2 hover:ring-2 hover:ring-gray-300" onclick="selectColor(this)"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-red-600 border-2 border-transparent ring-offset-2 hover:ring-2 hover:ring-gray-300" onclick="selectColor(this)"></button>
                     </div>
                 </div>
 
                 <div class="mb-8">
-                    <div class="flex justify-between mb-4">
-                        <span class="font-bold">Select Size (UK)</span>
-                        <span class="text-gray-500 hover:text-black cursor-pointer">Size Guide</span>
-                    </div>
+                    <div class="flex justify-between mb-4"><span class="font-bold">Select Size (UK)</span><span class="text-gray-400 underline text-xs cursor-pointer uppercase font-bold">Size Guide</span></div>
                     <div class="grid grid-cols-3 gap-2">
-                        <button class="size-btn border rounded-md py-3 hover:border-black font-medium transition focus:border-black focus:bg-black focus:text-white" onclick="selectSize(this)">UK 6</button>
-                        <button class="size-btn border rounded-md py-3 hover:border-black font-medium transition focus:border-black focus:bg-black focus:text-white" onclick="selectSize(this)">UK 7</button>
-                        <button class="size-btn border rounded-md py-3 hover:border-black font-medium transition focus:border-black focus:bg-black focus:text-white" onclick="selectSize(this)">UK 8</button>
-                        <button class="size-btn border rounded-md py-3 hover:border-black font-medium transition focus:border-black focus:bg-black focus:text-white" onclick="selectSize(this)">UK 9</button>
-                        <button class="size-btn border rounded-md py-3 hover:border-black font-medium transition focus:border-black focus:bg-black focus:text-white" onclick="selectSize(this)">UK 10</button>
-                        <button class="size-btn border rounded-md py-3 hover:border-black font-medium transition focus:border-black focus:bg-black focus:text-white" onclick="selectSize(this)">UK 11</button>
+                        <button class="size-btn border rounded-md py-3 hover:border-black font-medium transition" onclick="selectSize(this)">UK 8</button>
+                        <button class="size-btn border rounded-md py-3 hover:border-black font-medium transition" onclick="selectSize(this)">UK 9</button>
+                        <button class="size-btn border rounded-md py-3 hover:border-black font-medium transition" onclick="selectSize(this)">UK 10</button>
+                        <button class="size-btn border rounded-md py-3 hover:border-black font-medium transition" onclick="selectSize(this)">UK 11</button>
+                        <button class="size-btn border rounded-md py-3 hover:border-black font-medium transition" onclick="selectSize(this)">UK 12</button>
                     </div>
-                    <p id="size-error" class="text-red-600 text-sm mt-2 hidden font-medium">Please select a size.</p>
+                    <p id="size-error" class="text-red-600 text-sm mt-3 hidden font-medium">Please select a size.</p>
                 </div>
 
-                <button onclick="addToCart()" class="w-full bg-black text-white py-6 rounded-full font-bold text-lg hover:bg-gray-800 transition transform active:scale-95 mb-4">
-                    Add to Bag
-                </button>
-                <button class="w-full border border-gray-300 py-6 rounded-full font-bold text-lg hover:border-black transition flex items-center justify-center gap-2">
-                    Favourite <i data-lucide="heart" class="w-5 h-5"></i>
-                </button>
-
-                <div class="mt-12 space-y-6 border-t pt-8">
-                    <div class="group cursor-pointer">
-                        <h3 class="font-bold text-lg flex justify-between items-center">
-                            Delivery & Returns <i data-lucide="chevron-down" class="w-5 h-5"></i>
-                        </h3>
-                        <p class="text-gray-500 text-sm mt-2 hidden group-hover:block">Free standard delivery for Nike Members. Returns accepted within 30 days.</p>
-                    </div>
-                    <div class="group cursor-pointer border-t pt-6">
-                        <h3 class="font-bold text-lg flex justify-between items-center">
-                            Reviews (452) <i data-lucide="star" class="w-5 h-5 fill-black"></i>
-                        </h3>
-                    </div>
-                </div>
+                <button onclick="addToBag()" class="w-full bg-black text-white py-6 rounded-full font-bold text-lg hover:bg-gray-800 transition active:scale-95 mb-4 shadow-xl">Add to Bag</button>
+                <p class="text-center text-[10px] text-gray-400 font-medium italic pt-2">By Producthero. Compare related products from 50+ shops.</p>
             </div>
         </div>
     </section>
 
     <section id="campaign" class="bg-black text-white py-24 relative overflow-hidden">
-        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-        <div class="absolute -top-24 -right-24 w-96 h-96 bg-nike-volt rounded-full blur-[150px] opacity-20"></div>
         <div class="max-w-7xl mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center gap-16">
-            <div class="md:w-1/2">
-                <span class="bg-nike-volt text-black font-bold text-xs px-3 py-1 rounded uppercase mb-6 inline-block">Official UK Campaign</span>
-                <h2 class="text-5xl md:text-8xl font-black font-nike uppercase leading-none mb-6">
-                    30 Days.<br>50 KM.<br><span class="text-nike-volt">Legendary.</span>
-                </h2>
-                <p class="text-gray-400 text-lg mb-8 max-w-md">
-                    Join the Nike UK community on Strava. Run 50km in 30 days wearing any Nike shoe and unlock an exclusive 20% discount on the Pegasus 41.
-                </p>
-                <div class="flex gap-4 mb-8">
-                    <div class="bg-gray-900 p-4 rounded-lg text-center w-24 border border-gray-800">
-                        <div class="text-3xl font-black font-mono text-white" id="days">14</div>
-                        <div class="text-[10px] uppercase text-gray-500 font-bold tracking-wider">Days</div>
-                    </div>
-                    <div class="bg-gray-900 p-4 rounded-lg text-center w-24 border border-gray-800">
-                        <div class="text-3xl font-black font-mono text-white" id="hours">08</div>
-                        <div class="text-[10px] uppercase text-gray-500 font-bold tracking-wider">Hours</div>
-                    </div>
-                    <div class="bg-gray-900 p-4 rounded-lg text-center w-24 border border-gray-800 shadow-[0_0_15px_rgba(210,242,53,0.3)]">
-                        <div class="text-3xl font-black font-mono text-nike-volt" id="seconds">00</div>
-                        <div class="text-[10px] uppercase text-gray-500 font-bold tracking-wider">Secs</div>
-                    </div>
-                </div>
-                <form onsubmit="joinChallenge(event)" class="flex gap-2 max-w-md">
-                    <input type="email" placeholder="Email Address" required class="flex-1 bg-transparent border border-gray-600 rounded-full px-6 text-white placeholder-gray-500 focus:border-nike-volt focus:outline-none">
-                    <button type="submit" class="bg-nike-volt text-black px-8 py-4 rounded-full font-bold hover:bg-white transition uppercase text-sm">Join Now</button>
+            <div class="md:w-1/2 text-center md:text-left">
+                <h2 class="text-5xl md:text-8xl font-black font-nike uppercase leading-none mb-6 text-nike-volt">30 Days. 50 KM.</h2>
+                <p class="text-gray-400 text-lg mb-10 max-w-md mx-auto md:mx-0">Join our Strava community. Complete the goal and unlock 20% off your Pegasus 41.</p>
+                <form onsubmit="event.preventDefault(); alert('Joined!');" class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto md:mx-0">
+                    <input type="email" placeholder="Email Address" required class="flex-1 bg-transparent border border-gray-600 rounded-full px-6 py-4 text-white focus:border-nike-volt outline-none">
+                    <button class="bg-nike-volt text-black px-8 py-4 rounded-full font-bold uppercase text-sm">Join Now</button>
                 </form>
-            </div>
-            <div class="md:w-1/2 relative">
-                <div class="relative z-10 bg-gray-900 rounded-3xl p-8 border border-gray-800">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-12 h-12 bg-[#fc4c02] rounded-lg flex items-center justify-center">
-                            <i data-lucide="activity" class="text-white w-6 h-6"></i> </div>
-                        <div>
-                            <h4 class="font-bold text-lg">Nike Run Club</h4>
-                            <p class="text-gray-400 text-sm">Challenge Status: <span class="text-green-500">Active</span></p>
-                        </div>
-                    </div>
-                    <div class="h-40 bg-gray-800 rounded-xl mb-4 flex items-end p-4 gap-2">
-                        <div class="w-1/6 bg-gray-700 h-[30%] rounded-t"></div>
-                        <div class="w-1/6 bg-gray-700 h-[50%] rounded-t"></div>
-                        <div class="w-1/6 bg-nike-volt h-[80%] rounded-t relative">
-                            <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white text-black text-xs font-bold px-2 py-1 rounded">You</div>
-                        </div>
-                        <div class="w-1/6 bg-gray-700 h-[40%] rounded-t"></div>
-                        <div class="w-1/6 bg-gray-700 h-[60%] rounded-t"></div>
-                        <div class="w-1/6 bg-gray-700 h-[45%] rounded-t"></div>
-                    </div>
-                    <p class="text-sm text-gray-400">Join <span class="text-white font-bold">12,405 runners</span> in London currently participating.</p>
-                </div>
-                <div class="absolute -bottom-10 -left-10 w-full h-full border-2 border-dashed border-gray-700 rounded-3xl -z-0"></div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-black text-white pt-20 pb-8 px-6 border-t border-gray-900">
-        <div class="max-w-[1440px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-12 mb-20">
-            <div>
-                <h4 class="font-black font-nike uppercase text-sm mb-6">Find A Store</h4>
-                <ul class="space-y-3 text-gray-400 text-xs font-bold uppercase tracking-wide">
-                    <li><a href="#" class="hover:text-white transition">Become A Member</a></li>
-                    <li><a href="#" class="hover:text-white transition">Student Discount</a></li>
-                    <li><a href="#" class="hover:text-white transition">Feedback</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-black font-nike uppercase text-sm mb-6">Get Help</h4>
-                <ul class="space-y-3 text-gray-400 text-xs font-medium">
-                    <li><a href="#" class="hover:text-white transition">Order Status</a></li>
-                    <li><a href="#" class="hover:text-white transition">Delivery</a></li>
-                    <li><a href="#" class="hover:text-white transition">Returns</a></li>
-                    <li><a href="#" class="hover:text-white transition">Payment Options</a></li>
-                </ul>
-            </div>
-            <div class="col-span-2 md:col-span-1">
-                <h4 class="font-black font-nike uppercase text-sm mb-6">About Nike</h4>
-                <ul class="space-y-3 text-gray-400 text-xs font-medium">
-                    <li><a href="#" class="hover:text-white transition">News</a></li>
-                    <li><a href="#" class="hover:text-white transition">Careers</a></li>
-                    <li><a href="#" class="hover:text-white transition">Investors</a></li>
-                    <li><a href="#" class="hover:text-white transition">Sustainability</a></li>
-                </ul>
-            </div>
-            <div class="col-span-2 md:col-span-1 flex justify-end gap-4">
-                <i data-lucide="twitter" class="w-8 h-8 bg-gray-800 p-1.5 rounded-full hover:bg-white hover:text-black transition cursor-pointer"></i>
-                <i data-lucide="facebook" class="w-8 h-8 bg-gray-800 p-1.5 rounded-full hover:bg-white hover:text-black transition cursor-pointer"></i>
-                <i data-lucide="youtube" class="w-8 h-8 bg-gray-800 p-1.5 rounded-full hover:bg-white hover:text-black transition cursor-pointer"></i>
-                <i data-lucide="instagram" class="w-8 h-8 bg-gray-800 p-1.5 rounded-full hover:bg-white hover:text-black transition cursor-pointer"></i>
+    <footer class="bg-black text-white pt-20 pb-12 px-6 border-t border-gray-900">
+        <div class="max-w-[1440px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-12 mb-20 text-[11px] font-bold uppercase tracking-widest">
+            <div><h4 class="mb-6">Get Help</h4><ul class="space-y-3 text-gray-400"><li>Order Status</li><li>Delivery</li><li>Returns</li><li>Payment Options</li></ul></div>
+            <div><h4 class="mb-6">About Nike</h4><ul class="space-y-3 text-gray-400"><li>News</li><li>Careers</li><li>Investors</li><li>Sustainability</li></ul></div>
+            <div class="col-span-2 flex justify-end gap-6">
+                <i data-lucide="instagram" class="w-6 h-6 text-gray-400 hover:text-white cursor-pointer transition"></i>
+                <i data-lucide="twitter" class="w-6 h-6 text-gray-400 hover:text-white cursor-pointer transition"></i>
+                <i data-lucide="youtube" class="w-6 h-6 text-gray-400 hover:text-white cursor-pointer transition"></i>
             </div>
         </div>
-        <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between items-end border-t border-gray-900 pt-8">
-            <div class="flex items-center gap-2 mb-4 md:mb-0">
-                <i data-lucide="map-pin" class="w-4 h-4 text-white"></i>
-                <span class="text-xs font-bold text-white">United Kingdom</span>
-                <span class="text-xs text-gray-500 ml-4">© 2026 Nike, Inc. All Rights Reserved.</span>
-            </div>
-            <div class="flex gap-6">
-                <a href="#" class="text-xs text-gray-500 hover:text-white">Guides</a>
-                <a href="#" class="text-xs text-gray-500 hover:text-white">Terms of Sale</a>
-                <a href="#" class="text-xs text-gray-500 hover:text-white">Terms of Use</a>
-                <a href="#" class="text-xs text-gray-500 hover:text-white">Privacy Policy</a>
-            </div>
+        <div class="max-w-[1440px] mx-auto border-t border-gray-900 pt-8 flex flex-col md:flex-row justify-between items-center text-[10px] text-gray-500">
+            <div class="flex items-center gap-2 mb-4 md:mb-0"><i data-lucide="map-pin" class="w-3 h-3 text-white"></i><span class="text-white font-bold">United Kingdom</span><span>© 2026 Nike, Inc.</span></div>
+            <div class="flex gap-6"><span>Guides</span><span>Terms of Sale</span><span>Terms of Use</span><span>Privacy Policy</span></div>
         </div>
     </footer>
 
-    <div id="cart-drawer" class="fixed inset-y-0 right-0 w-full md:w-[400px] bg-white shadow-2xl z-[60] drawer drawer-closed flex flex-col">
-        <div class="p-6 border-b flex justify-between items-center bg-gray-50">
-            <h2 class="text-xl font-black font-nike uppercase">Your Bag</h2>
-            <button onclick="toggleCart()" class="p-2 hover:bg-gray-200 rounded-full"><i data-lucide="x" class="w-6 h-6"></i></button>
-        </div>
-        <div class="flex-1 p-6 flex flex-col items-center justify-center text-center" id="empty-cart">
-            <p class="text-gray-500 font-medium">Your bag is empty.</p>
-        </div>
-        <div class="hidden flex-1 p-6" id="cart-items">
-            <div class="flex gap-4 mb-6">
-                <img src="./test1.jpg" class="w-20 h-20 rounded object-cover">
-                <div>
-                    <h4 class="font-bold">Nike Pegasus 41</h4>
-                    <p class="text-gray-500 text-sm">Men's Road Running Shoes</p>
-                    <p class="text-sm font-bold mt-1" id="cart-size">Size: UK 9</p>
-                    <p class="mt-2 font-bold">£119.95</p>
-                </div>
-            </div>
-        </div>
-        <div class="hidden flex-1 p-6 flex flex-col" id="checkout-view">
-            <h3 class="font-black font-nike uppercase text-lg mb-4">Secure Checkout</h3>
-            <form onsubmit="processPayment(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-bold uppercase mb-1">Email Address</label>
-                    <input type="email" id="email-input" required class="w-full border p-3 rounded-lg focus:ring-2 focus:ring-black outline-none text-sm">
-                </div>
-                <button type="submit" id="pay-btn" class="w-full bg-black text-white py-4 rounded-full font-bold uppercase hover:bg-gray-800 transition mt-4">Pay £119.95</button>
-            </form>
-        </div>
-        <div class="p-6 border-t bg-gray-50" id="cart-footer">
-            <div class="flex justify-between mb-4 text-lg font-bold">
-                <span>Subtotal</span>
-                <span id="subtotal">£0.00</span>
-            </div>
-            <button class="w-full bg-black text-white py-4 rounded-full font-bold uppercase hover:bg-gray-800 transition" onclick="proceedToCheckout()">Checkout</button>
-        </div>
+    <div id="cart-drawer" class="fixed inset-y-0 right-0 w-full md:w-[400px] bg-white shadow-2xl z-[60] drawer drawer-closed flex flex-col p-8">
+        <div class="flex justify-between items-center border-b pb-4 mb-8"><h2 class="text-xl font-black uppercase">Your Bag</h2><button onclick="toggleCart()"><i data-lucide="x"></i></button></div>
+        <div id="cart-content" class="flex-1 flex flex-col items-center justify-center text-gray-400 italic">Your bag is empty.</div>
     </div>
     <div id="backdrop" class="fixed inset-0 bg-black/50 z-50 hidden backdrop-blur-sm" onclick="toggleCart()"></div>
 
     <div class="fixed bottom-6 right-6 z-[100] flex flex-col items-end">
-        <div id="bot-window" class="bot-hidden mb-4 w-[350px] bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden flex flex-col h-[500px]">
+        <div id="bot-window" class="bot-hidden mb-4 w-[350px] bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden flex flex-col h-[520px]">
             <div class="p-5 bg-white border-b flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 p-[2px]">
-                        <div class="bg-white w-full h-full rounded-full flex items-center justify-center text-black">
-                            <i data-lucide="instagram" class="w-5 h-5"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="text-[12px] font-black uppercase tracking-tight">Nike Official</p>
-                        <p class="text-[10px] text-green-500 font-bold italic">Online Assistant</p>
-                    </div>
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 p-[2px]"><div class="bg-white w-full h-full rounded-full flex items-center justify-center"><i data-lucide="instagram" class="w-5 h-5 text-black"></i></div></div>
+                    <div><p class="text-[12px] font-black uppercase">Nike Official</p><p class="text-[10px] text-green-500 font-bold italic">Instagram Direct Automation</p></div>
                 </div>
-                <button onclick="toggleBot()" class="p-2 hover:bg-gray-100 rounded-full transition"><i data-lucide="x" class="w-5 h-5 text-gray-400"></i></button>
+                <button onclick="toggleBot()"><i data-lucide="x" class="w-5 h-5 text-gray-400"></i></button>
             </div>
-            <div id="chat-messages" class="flex-1 p-4 bg-white overflow-y-auto space-y-4 no-scrollbar">
-                <div class="bg-gray-100 text-black text-[13px] p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] animate-msg">
-                    Hi there! 👋 I'm your automated Nike assistant. How can I help you reach your goals today?
-                </div>
+            <div id="chat-messages" class="flex-1 p-5 overflow-y-auto space-y-4 no-scrollbar bg-white">
+                <div class="bg-gray-100 text-black text-[13px] p-3.5 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] animate-msg">Hi! 👋 I'm your automated assistant for the Pegasus 41 launch. How can I assist you today?</div>
             </div>
             <div class="p-4 border-t bg-gray-50 grid grid-cols-2 gap-2">
-                <button onclick="botReply('price')" class="text-[11px] font-bold border border-gray-200 py-2.5 rounded-xl bg-white hover:border-black transition">Price Info</button>
-                <button onclick="botReply('delivery')" class="text-[11px] font-bold border border-gray-200 py-2.5 rounded-xl bg-white hover:border-black transition">Delivery Times</button>
-                <button onclick="botReply('strava')" class="text-[11px] font-bold border border-gray-200 py-2.5 rounded-xl bg-white hover:border-black transition">Strava Challenge</button>
-                <button onclick="botReply('discount')" class="text-[11px] font-bold border border-gray-200 py-2.5 rounded-xl bg-white hover:border-black transition">Unlock 20% Off</button>
+                <button onclick="botReply('price')" class="text-[11px] font-bold border border-gray-200 py-3 rounded-xl bg-white hover:border-black transition">Product Info</button>
+                <button onclick="botReply('delivery')" class="text-[11px] font-bold border border-gray-200 py-3 rounded-xl bg-white hover:border-black transition">Delivery Times</button>
+                <button onclick="botReply('strava')" class="text-[11px] font-bold border border-gray-200 py-3 rounded-xl bg-white hover:border-black transition">Strava Challenge</button>
+                <button onclick="botReply('discount')" class="text-[11px] font-bold border border-gray-200 py-3 rounded-xl bg-white hover:border-black transition">Claim Discount</button>
             </div>
         </div>
-        <button onclick="toggleBot()" class="flex items-center gap-3 bg-black text-white p-2 pr-6 rounded-full shadow-2xl hover:scale-105 transition active:scale-95 border-2 border-white/10">
-            <div class="w-11 h-11 bg-nike-volt rounded-full flex items-center justify-center text-black">
-                <i data-lucide="message-circle" class="w-6 h-6"></i>
-            </div>
-            <span class="text-sm font-bold tracking-tight">Chat with our bot</span>
-        </button>
+        <button onclick="toggleBot()" class="flex items-center gap-3 bg-black text-white p-2 pr-6 rounded-full shadow-2xl hover:scale-105 transition active:scale-95 border-2 border-white/10"><div class="w-11 h-11 bg-nike-volt rounded-full flex items-center justify-center text-black shadow-lg"><i data-lucide="message-circle"></i></div><span class="text-sm font-bold">Chat with our bot</span></button>
     </div>
 
     <script>
         lucide.createIcons();
+
+        // GALLERY LOGIC
+        const carousel = document.getElementById('image-carousel');
+        function scrollGallery(dir) { carousel.scrollBy({ left: carousel.offsetWidth * dir, behavior: 'smooth' }); }
+        carousel.addEventListener('scroll', () => {
+            const index = Math.round(carousel.scrollLeft / carousel.offsetWidth);
+            for(let i=0; i<3; i++) {
+                const dot = document.getElementById(`dot-${i}`);
+                if(dot) {
+                    dot.style.backgroundColor = (i === index) ? 'black' : '#D1D5DB';
+                    dot.style.width = (i === index) ? '24px' : '8px';
+                }
+            }
+        });
+
+        // SELECTION LOGIC
         let selectedSize = null;
-
-        function selectSize(btn) {
-            document.querySelectorAll('.size-btn').forEach(b => {
-                b.classList.remove('border-black', 'bg-black', 'text-white');
-                b.classList.add('border-gray-200');
-            });
-            btn.classList.add('border-black', 'bg-black', 'text-white');
-            selectedSize = btn.innerText;
-            document.getElementById('size-error').classList.add('hidden');
-        }
-
         function selectColor(btn) {
             document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('ring-2', 'ring-black', 'border-black'));
             btn.classList.add('ring-2', 'ring-black', 'border-black');
         }
-
-        function addToCart() {
-            if (!selectedSize) {
-                document.getElementById('size-error').classList.remove('hidden');
-                return;
-            }
-            const badge = document.getElementById('cart-badge');
-            badge.innerText = "1";
-            badge.classList.remove('opacity-0');
-            document.getElementById('empty-cart').classList.add('hidden');
-            document.getElementById('cart-items').classList.remove('hidden');
-            document.getElementById('cart-size').innerText = `Size: ${selectedSize}`;
-            document.getElementById('subtotal').innerText = "£119.95";
-            toggleCart(true);
+        function selectSize(btn) {
+            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('bg-black', 'text-white'));
+            btn.classList.add('bg-black', 'text-white');
+            selectedSize = btn.innerText;
+            document.getElementById('size-error').classList.add('hidden');
         }
 
-        function toggleCart(forceOpen = false) {
-            const drawer = document.getElementById('cart-drawer');
-            const backdrop = document.getElementById('backdrop');
-            if (forceOpen || drawer.classList.contains('drawer-closed')) {
-                drawer.classList.remove('drawer-closed');
-                drawer.classList.add('drawer-open');
-                backdrop.classList.remove('hidden');
-            } else {
-                drawer.classList.add('drawer-closed');
-                drawer.classList.remove('drawer-open');
-                backdrop.classList.add('hidden');
-            }
+        // CART LOGIC
+        function toggleCart() { document.getElementById('cart-drawer').classList.toggle('drawer-closed'); document.getElementById('backdrop').classList.toggle('hidden'); }
+        function addToBag() { 
+            if(!selectedSize) { document.getElementById('size-error').classList.remove('hidden'); return; }
+            const badge = document.getElementById('cart-badge'); 
+            badge.innerText = "1"; badge.classList.remove('opacity-0'); 
+            document.getElementById('cart-content').innerHTML = `
+                <div class="flex gap-4 items-center animate-msg w-full">
+                    <img src="./test1.jpg" class="w-20 bg-gray-100 rounded-xl">
+                    <div class="flex-1"><p class="font-bold uppercase text-xs">Nike Pegasus 41</p><p class="text-[10px] text-gray-500">Size: ${selectedSize}</p><p class="text-sm font-black">£119.95</p></div>
+                </div>
+                <button class="w-full bg-black text-white py-4 rounded-full font-bold uppercase mt-10">Checkout Now</button>`;
+            toggleCart(); 
         }
-
-        function proceedToCheckout() {
-            document.getElementById('cart-items').classList.add('hidden');
-            document.getElementById('cart-footer').classList.add('hidden');
-            document.getElementById('checkout-view').classList.remove('hidden');
-        }
-
-        function processPayment(e) {
-            e.preventDefault();
-            const btn = document.getElementById('pay-btn');
-            btn.innerHTML = '<div class="loader"></div>';
-            setTimeout(() => {
-                document.getElementById('checkout-view').classList.add('hidden');
-                document.getElementById('success-view').classList.remove('hidden');
-                document.getElementById('cart-badge').classList.add('opacity-0');
-            }, 2000);
-        }
-
-        function joinChallenge(e) {
-            e.preventDefault();
-            const btn = e.target.querySelector('button');
-            btn.innerText = "Processing...";
-            btn.disabled = true;
-            setTimeout(() => {
-                btn.innerText = "You're In!";
-                btn.classList.remove('bg-nike-volt', 'text-black');
-                btn.classList.add('bg-green-500', 'text-white');
-                alert("Welcome! Check your email for Strava instructions.");
-            }, 1500);
-        }
-
-        function startTimer() {
-            const target = new Date();
-            target.setDate(target.getDate() + 14);
-            function update() {
-                const now = new Date();
-                const diff = target - now;
-                if (diff <= 0) return;
-                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const s = Math.floor((diff % (1000 * 60)) / 1000);
-                document.getElementById('days').innerText = d < 10 ? '0' + d : d;
-                document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
-                document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
-                document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
-            }
-            setInterval(update, 1000);
-            update();
-        }
-        startTimer();
-
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) nav.classList.add('shadow-sm');
-            else nav.classList.remove('shadow-sm');
-        });
 
         // BOT LOGIC
-        function toggleBot() {
-            const bot = document.getElementById('bot-window');
-            bot.classList.toggle('bot-hidden');
-            bot.classList.toggle('bot-visible');
-        }
-
+        function toggleBot() { const bot = document.getElementById('bot-window'); bot.classList.toggle('bot-hidden'); bot.classList.toggle('bot-visible'); }
         const botResponses = {
-            price: "The **Nike Pegasus 41** is currently priced at **£119.95**. Members get free standard delivery!",
-            delivery: "Standard UK delivery is **FREE** for members and usually takes 2-4 business days.",
-            strava: "Complete **50KM in 30 days** on our Strava club to earn exclusive digital badges!",
-            discount: "Once you finish the Strava challenge, we'll automatically DM you a **20% OFF** code!"
+            price: `<div class="bg-white rounded-2xl border border-gray-100 shadow-lg overflow-hidden animate-msg mt-2"><div class="bg-[#F8F8F8] p-4 flex items-center justify-center"><img src="./test1.jpg" class="w-full mix-blend-multiply"></div><div class="p-3"><p class="text-[14px] font-black">£119.95</p><p class="text-[10px] text-green-600 font-bold uppercase">In Stock | Free UK Shipping</p></div></div>`,
+            delivery: "We offer **Free Standard Delivery** (2-4 business days) for all members. Next-day is £5.95.",
+            strava: "Complete **50KM in 30 days** using the NRC app to unlock your reward badge!",
+            discount: "Finish the Strava goal and we'll **instantly DM you** a unique 20% OFF discount code!"
         };
-
         function botReply(type) {
             const chat = document.getElementById('chat-messages');
-            const userDiv = document.createElement('div');
-            userDiv.className = "flex justify-end animate-msg";
-            userDiv.innerHTML = `<div class="bg-black text-white text-[11px] p-2.5 px-4 rounded-2xl rounded-tr-none font-bold uppercase tracking-widest">${type.replace('_', ' ')}</div>`;
-            chat.appendChild(userDiv);
-
+            const user = document.createElement('div'); user.className="flex justify-end animate-msg"; user.innerHTML=`<div class="bg-black text-white text-[10px] p-2.5 px-5 rounded-full font-bold uppercase tracking-wider">${type}</div>`;
+            chat.appendChild(user);
             setTimeout(() => {
-                const botDiv = document.createElement('div');
-                botDiv.className = "bg-gray-100 text-black text-[13px] p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] animate-msg leading-relaxed";
-                botDiv.innerHTML = botResponses[type];
-                chat.appendChild(botDiv);
-                chat.scrollTop = chat.scrollHeight;
+                const bot = document.createElement('div'); bot.className="bg-gray-100 text-black text-[13px] p-3.5 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] animate-msg leading-relaxed";
+                bot.innerHTML = botResponses[type]; chat.appendChild(bot); lucide.createIcons(); chat.scrollTop = chat.scrollHeight;
             }, 600);
         }
     </script>
