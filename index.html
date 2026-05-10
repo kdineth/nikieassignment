@@ -145,6 +145,9 @@
                         <button class="color-btn w-10 h-10 rounded-full bg-nike-volt border-2 border-transparent hover:border-black transition ring-offset-2 focus:outline-none" onclick="selectColor(this, 'Volt')"></button>
                         <button class="color-btn w-10 h-10 rounded-full bg-black border-2 border-transparent hover:border-black transition ring-offset-2 focus:outline-none" onclick="selectColor(this, 'Black')"></button>
                         <button class="color-btn w-10 h-10 rounded-full bg-white border-2 border-gray-300 hover:border-black transition ring-offset-2 focus:outline-none" onclick="selectColor(this, 'White')"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-gray-400 border-2 border-transparent hover:border-black transition ring-offset-2 focus:outline-none" onclick="selectColor(this, 'Grey')"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-blue-600 border-2 border-transparent hover:border-black transition ring-offset-2 focus:outline-none" onclick="selectColor(this, 'Blue')"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-red-600 border-2 border-transparent hover:border-black transition ring-offset-2 focus:outline-none" onclick="selectColor(this, 'Red')"></button>
                     </div>
                     <p id="color-label" class="text-sm text-gray-500 mt-2 font-medium italic">Selected: None</p>
                 </div>
@@ -204,6 +207,10 @@
                     <div class="bg-gray-900 p-4 rounded-lg text-center w-24 border border-gray-800">
                         <div class="text-3xl font-black font-mono text-white" id="hours">08</div>
                         <div class="text-[10px] uppercase text-gray-500 font-bold tracking-wider">Hours</div>
+                    </div>
+                    <div class="bg-gray-900 p-4 rounded-lg text-center w-24 border border-gray-800">
+                        <div class="text-3xl font-black font-mono text-white" id="minutes">00</div>
+                        <div class="text-[10px] uppercase text-gray-500 font-bold tracking-wider">Mins</div>
                     </div>
                     <div class="bg-gray-900 p-4 rounded-lg text-center w-24 border border-gray-800 shadow-[0_0_15px_rgba(210,242,53,0.3)]">
                         <div class="text-3xl font-black font-mono text-nike-volt" id="seconds">00</div>
@@ -301,7 +308,7 @@
             <p class="text-gray-500 font-medium">Your bag is empty.</p>
         </div>
         <div class="hidden flex-1 p-6" id="cart-items">
-            <div class="flex gap-4 mb-6">
+            <div class="flex gap-4">
                 <img src="./test1.jpg" class="w-20 h-20 rounded object-cover border border-gray-200">
                 <div>
                     <h4 class="font-bold">Nike Pegasus 41</h4>
