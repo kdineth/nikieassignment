@@ -90,21 +90,16 @@
     </section>
 
     <section id="product" class="max-w-[1440px] mx-auto pt-12 md:pt-24 pb-24 px-4 md:px-12">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            <div class="group">
-                <div class="overflow-hidden rounded-xl bg-gray-100 aspect-[4/5] flex items-center justify-center p-4">
-                    <img src="./test1.jpg" class="w-full h-full object-contain hover:scale-[1.05] transition duration-500 cursor-zoom-in" alt="Side View">
-                </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <div class="group overflow-hidden rounded-xl bg-gray-100 aspect-[4/5] flex items-center justify-center p-4">
+                <img src="./test1.jpg" class="w-full h-full object-contain hover:scale-[1.05] transition duration-500 cursor-zoom-in" alt="Side View">
             </div>
-            <div class="group">
-                <div class="overflow-hidden rounded-xl bg-gray-100 aspect-[4/5] flex items-center justify-center p-4">
-                    <img src="./test2.jpg" class="w-full h-full object-contain hover:scale-[1.05] transition duration-500 cursor-zoom-in" alt="Top View">
-                </div>
+            <div class="group overflow-hidden rounded-xl bg-gray-100 aspect-[4/5] flex items-center justify-center p-4">
+                <img src="./test2.jpg" class="w-full h-full object-contain hover:scale-[1.05] transition duration-500 cursor-zoom-in" alt="Top View">
             </div>
-            <div class="group">
-                <div class="overflow-hidden rounded-xl bg-gray-100 aspect-[4/5] flex items-center justify-center p-4">
-                    <img src="./shoe3.webp" class="w-full h-full object-contain hover:scale-[1.05] transition duration-500 cursor-zoom-in" alt="Alternative View">
-                </div>
+            <div class="group overflow-hidden rounded-xl bg-gray-100 aspect-[4/5] flex items-center justify-center p-4">
+                <img src="./shoe3.webp" class="w-full h-full object-contain hover:scale-[1.05] transition duration-500 cursor-zoom-in" alt="Alternative View">
             </div>
         </div>
 
@@ -112,9 +107,12 @@
             <div class="lg:w-2/3">
                 <div class="sticky top-24">
                     <div class="overflow-hidden rounded-3xl bg-black relative aspect-video shadow-2xl">
-                        <iframe src="https://www.youtube.com/embed/L2T79Sgh6f0" class="absolute top-0 left-0 w-full h-full rounded-xl" title="Nike Pegasus 41" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe src="https://www.youtube.com/embed/iwY8tJ5ige4" class="absolute top-0 left-0 w-full h-full rounded-xl" title="Nike Pegasus 41 Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
-                    <p class="text-sm font-medium text-gray-500 mt-4">Experience the ReactX foam innovation in the new Pegasus 41.</p>
+                    <div class="mt-8 p-8 bg-gray-50 rounded-3xl">
+                        <h3 class="text-2xl font-black font-nike uppercase mb-4">Innovation in Every Step</h3>
+                        <p class="text-gray-600 leading-relaxed">The Nike Pegasus 41 returns with the signature responsiveness and neutral support you love, but with a lighter, more energetic ReactX foam midsole. Designed to handle the grit of the road and the pace of your goals.</p>
+                    </div>
                 </div>
             </div>
 
@@ -128,15 +126,16 @@
                     <div>
                         <span class="block text-[10px] font-black uppercase text-nike-volt bg-black px-2 py-0.5 rounded w-fit mb-1">Limited Offer</span>
                         <p class="text-sm font-bold leading-tight text-black">With every purchase we are giving away Nike Running Glasses.</p>
+                        <p class="text-[11px] text-gray-500 mt-1">Automatically added to bag.</p>
                     </div>
                 </div>
 
                 <div class="mb-8">
                     <span class="font-bold block mb-4 uppercase text-xs tracking-widest">Select Color</span>
                     <div class="flex flex-wrap gap-4" id="color-selectors">
-                        <button class="color-btn w-10 h-10 rounded-full bg-nike-volt border-2 border-transparent hover:border-black transition" onclick="selectColor(this, 'Volt')"></button>
-                        <button class="color-btn w-10 h-10 rounded-full bg-black border-2 border-transparent hover:border-black transition" onclick="selectColor(this, 'Black')"></button>
-                        <button class="color-btn w-10 h-10 rounded-full bg-white border-2 border-gray-300 hover:border-black transition" onclick="selectColor(this, 'White')"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-nike-volt border-2 border-transparent hover:border-black transition ring-offset-2 focus:outline-none" onclick="selectColor(this, 'Volt')"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-black border-2 border-transparent hover:border-black transition ring-offset-2 focus:outline-none" onclick="selectColor(this, 'Black')"></button>
+                        <button class="color-btn w-10 h-10 rounded-full bg-white border-2 border-gray-300 hover:border-black transition ring-offset-2 focus:outline-none" onclick="selectColor(this, 'White')"></button>
                     </div>
                     <p id="color-label" class="text-sm text-gray-500 mt-2 font-medium italic">Selected: None</p>
                 </div>
@@ -146,9 +145,11 @@
                         <span class="font-bold uppercase text-xs tracking-widest">Select Size (UK)</span>
                     </div>
                     <div class="grid grid-cols-3 gap-2">
-                        <button class="size-btn border rounded-md py-3 hover:border-black font-medium transition" onclick="selectSize(this)">UK 8</button>
-                        <button class="size-btn border rounded-md py-3 hover:border-black font-medium transition" onclick="selectSize(this)">UK 9</button>
-                        <button class="size-btn border rounded-md py-3 hover:border-black font-medium transition" onclick="selectSize(this)">UK 10</button>
+                        <button class="size-btn border rounded-md py-3 hover:border-black font-medium transition focus:outline-none" onclick="selectSize(this)">UK 8</button>
+                        <button class="size-btn border rounded-md py-3 hover:border-black font-medium transition focus:outline-none" onclick="selectSize(this)">UK 9</button>
+                        <button class="size-btn border rounded-md py-3 hover:border-black font-medium transition focus:outline-none" onclick="selectSize(this)">UK 10</button>
+                        <button class="size-btn border rounded-md py-3 hover:border-black font-medium transition focus:outline-none" onclick="selectSize(this)">UK 11</button>
+                        <button class="size-btn border rounded-md py-3 hover:border-black font-medium transition focus:outline-none" onclick="selectSize(this)">UK 12</button>
                     </div>
                     <p id="size-error" class="text-red-600 text-sm mt-2 hidden font-medium">Please select a size.</p>
                 </div>
@@ -157,17 +158,15 @@
                     Add to Bag
                 </button>
                 <button onclick="toggleFavourite()" class="w-full border border-gray-300 py-6 rounded-full font-bold text-lg hover:border-black transition flex items-center justify-center gap-2">
-                    Favourite <i id="fav-icon" data-lucide="heart" class="w-5 h-5"></i>
+                    Favourite <i id="fav-icon" data-lucide="heart" class="w-5 h-5 transition-colors duration-300"></i>
                 </button>
 
                 <div class="mt-12 space-y-6 border-t pt-8">
-                    <div class="flex justify-between items-center group cursor-pointer">
-                        <span class="font-bold uppercase text-sm">Delivery & Returns</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                    <div class="group cursor-pointer">
+                        <h3 class="font-bold text-lg flex justify-between items-center uppercase text-sm">Delivery & Returns <i data-lucide="chevron-down" class="w-5 h-5"></i></h3>
                     </div>
-                    <div class="flex justify-between items-center group cursor-pointer border-t pt-6">
-                        <span class="font-bold uppercase text-sm">Reviews (452)</span>
-                        <i data-lucide="star" class="w-5 h-5 fill-black"></i>
+                    <div class="group cursor-pointer border-t pt-6">
+                        <h3 class="font-bold text-lg flex justify-between items-center uppercase text-sm">Reviews (452) <i data-lucide="star" class="w-5 h-5 fill-black"></i></h3>
                     </div>
                 </div>
             </div>
@@ -191,6 +190,10 @@
                         <div class="text-3xl font-black font-mono text-white" id="days">14</div>
                         <div class="text-[10px] uppercase text-gray-500 font-bold tracking-wider">Days</div>
                     </div>
+                    <div class="bg-gray-900 p-4 rounded-lg text-center w-24 border border-gray-800">
+                        <div class="text-3xl font-black font-mono text-white" id="hours">08</div>
+                        <div class="text-[10px] uppercase text-gray-500 font-bold tracking-wider">Hours</div>
+                    </div>
                     <div class="bg-gray-900 p-4 rounded-lg text-center w-24 border border-gray-800 shadow-[0_0_15px_rgba(210,242,53,0.3)]">
                         <div class="text-3xl font-black font-mono text-nike-volt" id="seconds">00</div>
                         <div class="text-[10px] uppercase text-gray-500 font-bold tracking-wider">Secs</div>
@@ -212,11 +215,18 @@
                         </div>
                     </div>
                     <div class="h-40 bg-gray-800 rounded-xl mb-4 flex items-end p-4 gap-2">
+                        <div class="w-1/6 bg-gray-700 h-[30%] rounded-t"></div>
+                        <div class="w-1/6 bg-gray-700 h-[50%] rounded-t"></div>
                         <div class="w-1/6 bg-nike-volt h-[80%] rounded-t relative">
                             <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-white text-black text-xs font-bold px-2 py-1 rounded">You</div>
                         </div>
+                        <div class="w-1/6 bg-gray-700 h-[40%] rounded-t"></div>
+                        <div class="w-1/6 bg-gray-700 h-[60%] rounded-t"></div>
+                        <div class="w-1/6 bg-gray-700 h-[45%] rounded-t"></div>
                     </div>
+                    <p class="text-sm text-gray-400">Join <span class="text-white font-bold">12,405 runners</span> in London currently participating.</p>
                 </div>
+                <div class="absolute -bottom-10 -left-10 w-full h-full border-2 border-dashed border-gray-700 rounded-3xl -z-0"></div>
             </div>
         </div>
     </section>
@@ -228,11 +238,14 @@
                 <ul class="space-y-3 text-gray-400 text-xs font-bold uppercase tracking-wide">
                     <li><a href="#" class="hover:text-white transition">Become A Member</a></li>
                     <li><a href="#" class="hover:text-white transition">Student Discount</a></li>
+                    <li><a href="#" class="hover:text-white transition">Feedback</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="font-black font-nike uppercase text-sm mb-6">Get Help</h4>
                 <ul class="space-y-3 text-gray-400 text-xs font-medium">
+                    <li><a href="#" class="hover:text-white transition">Order Status</a></li>
+                    <li><a href="#" class="hover:text-white transition">Delivery</a></li>
                     <li><a href="#" class="hover:text-white transition">Returns</a></li>
                     <li><a href="#" class="hover:text-white transition">Payment Options</a></li>
                 </ul>
@@ -240,8 +253,30 @@
             <div class="col-span-2 md:col-span-1">
                 <h4 class="font-black font-nike uppercase text-sm mb-6">About Nike</h4>
                 <ul class="space-y-3 text-gray-400 text-xs font-medium">
+                    <li><a href="#" class="hover:text-white transition">News</a></li>
+                    <li><a href="#" class="hover:text-white transition">Careers</a></li>
+                    <li><a href="#" class="hover:text-white transition">Investors</a></li>
                     <li><a href="#" class="hover:text-white transition">Sustainability</a></li>
                 </ul>
+            </div>
+            <div class="col-span-2 md:col-span-1 flex justify-end gap-4">
+                <i data-lucide="twitter" class="w-8 h-8 bg-gray-800 p-1.5 rounded-full hover:bg-white hover:text-black transition cursor-pointer"></i>
+                <i data-lucide="facebook" class="w-8 h-8 bg-gray-800 p-1.5 rounded-full hover:bg-white hover:text-black transition cursor-pointer"></i>
+                <i data-lucide="youtube" class="w-8 h-8 bg-gray-800 p-1.5 rounded-full hover:bg-white hover:text-black transition cursor-pointer"></i>
+                <i data-lucide="instagram" class="w-8 h-8 bg-gray-800 p-1.5 rounded-full hover:bg-white hover:text-black transition cursor-pointer"></i>
+            </div>
+        </div>
+        <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between items-end border-t border-gray-900 pt-8">
+            <div class="flex items-center gap-2 mb-4 md:mb-0">
+                <i data-lucide="map-pin" class="w-4 h-4 text-white"></i>
+                <span class="text-xs font-bold text-white">United Kingdom</span>
+                <span class="text-xs text-gray-500 ml-4">© 2026 Nike, Inc. All Rights Reserved.</span>
+            </div>
+            <div class="flex gap-6">
+                <a href="#" class="text-xs text-gray-500 hover:text-white">Guides</a>
+                <a href="#" class="text-xs text-gray-500 hover:text-white">Terms of Sale</a>
+                <a href="#" class="text-xs text-gray-500 hover:text-white">Terms of Use</a>
+                <a href="#" class="text-xs text-gray-500 hover:text-white">Privacy Policy</a>
             </div>
         </div>
     </footer>
@@ -256,35 +291,40 @@
         </div>
         <div class="hidden flex-1 p-6" id="cart-items">
             <div class="flex gap-4">
-                <img src="./test1.jpg" class="w-20 h-20 rounded object-cover">
+                <img src="./test1.jpg" class="w-20 h-20 rounded object-cover border border-gray-200">
                 <div>
                     <h4 class="font-bold">Nike Pegasus 41</h4>
-                    <p class="text-sm font-bold" id="cart-details">Size: UK 9</p>
+                    <p class="text-gray-500 text-sm" id="cart-details">Size: UK 9</p>
                     <p class="mt-2 font-bold">£119.95</p>
                 </div>
             </div>
         </div>
         <div class="p-6 border-t bg-gray-50" id="cart-footer">
-            <button class="w-full bg-black text-white py-4 rounded-full font-bold uppercase hover:bg-gray-800 transition" onclick="toggleCart()">Close</button>
+            <button class="w-full bg-black text-white py-4 rounded-full font-bold uppercase hover:bg-gray-800 transition" onclick="toggleCart()">Close Bag</button>
         </div>
     </div>
     <div id="backdrop" class="fixed inset-0 bg-black/50 z-50 hidden backdrop-blur-sm" onclick="toggleCart()"></div>
 
     <script>
         lucide.createIcons();
+
         let selectedSize = null;
         let selectedColor = null;
         let isFavourite = false;
 
         function selectSize(btn) {
-            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('border-black', 'bg-black', 'text-white'));
+            document.querySelectorAll('.size-btn').forEach(b => {
+                b.classList.remove('border-black', 'bg-black', 'text-white');
+            });
             btn.classList.add('border-black', 'bg-black', 'text-white');
             selectedSize = btn.innerText;
             document.getElementById('size-error').classList.add('hidden');
         }
 
         function selectColor(btn, colorName) {
-            document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('ring-2', 'ring-black'));
+            document.querySelectorAll('.color-btn').forEach(b => {
+                b.classList.remove('ring-2', 'ring-black');
+            });
             btn.classList.add('ring-2', 'ring-black');
             selectedColor = colorName;
             document.getElementById('color-label').innerText = `Selected: ${colorName}`;
@@ -293,12 +333,18 @@
         function toggleFavourite() {
             isFavourite = !isFavourite;
             const icon = document.getElementById('fav-icon');
-            icon.classList.toggle('fill-red-500', isFavourite);
-            icon.classList.toggle('text-red-500', isFavourite);
+            if(isFavourite) {
+                icon.classList.add('fill-red-500', 'text-red-500');
+            } else {
+                icon.classList.remove('fill-red-500', 'text-red-500');
+            }
         }
 
         function addToCart() {
-            if (!selectedSize) { document.getElementById('size-error').classList.remove('hidden'); return; }
+            if (!selectedSize) {
+                document.getElementById('size-error').classList.remove('hidden');
+                return;
+            }
             const badge = document.getElementById('cart-badge');
             badge.innerText = "1";
             badge.classList.remove('opacity-0');
@@ -312,22 +358,50 @@
             const drawer = document.getElementById('cart-drawer');
             const backdrop = document.getElementById('backdrop');
             if (forceOpen || drawer.classList.contains('drawer-closed')) {
-                drawer.classList.replace('drawer-closed', 'drawer-open'); backdrop.classList.remove('hidden');
+                drawer.classList.remove('drawer-closed'); drawer.classList.add('drawer-open');
+                backdrop.classList.remove('hidden');
             } else {
-                drawer.classList.replace('drawer-open', 'drawer-closed'); backdrop.classList.add('hidden');
+                drawer.classList.add('drawer-closed'); drawer.classList.remove('drawer-open');
+                backdrop.classList.add('hidden');
             }
         }
 
+        function joinChallenge(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            btn.innerText = "You're In!";
+            btn.classList.replace('bg-nike-volt', 'bg-green-500');
+            btn.classList.replace('text-black', 'text-white');
+            alert("Check your email for Strava instructions!");
+        }
+
         function startTimer() {
-            const target = new Date(); target.setDate(target.getDate() + 14);
-            setInterval(() => {
-                const diff = target - new Date();
+            const target = new Date();
+            target.setDate(target.getDate() + 14);
+            function update() {
+                const now = new Date();
+                const diff = target - now;
                 if (diff <= 0) return;
-                document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-                document.getElementById('seconds').innerText = Math.floor((diff % (1000 * 60)) / 1000);
-            }, 1000);
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                if(document.getElementById('days')) document.getElementById('days').innerText = d < 10 ? '0' + d : d;
+                if(document.getElementById('hours')) document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
+                if(document.getElementById('minutes')) document.getElementById('minutes').innerText = m < 10 ? '0' + m : m; 
+                if(document.getElementById('seconds')) document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
+            }
+            setInterval(update, 1000);
+            update();
         }
         startTimer();
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) nav.classList.add('shadow-sm');
+            else nav.classList.remove('shadow-sm');
+        });
     </script>
 </body>
 </html>
