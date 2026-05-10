@@ -92,14 +92,23 @@
     <section id="product" class="max-w-[1440px] mx-auto pt-12 md:pt-24 pb-24 px-4 md:px-12">
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            <div class="group overflow-hidden rounded-xl bg-gray-100 aspect-[4/5] flex items-center justify-center p-4">
-                <img src="./test1.jpg" class="w-full h-full object-contain hover:scale-[1.05] transition duration-500 cursor-zoom-in" alt="Side View">
+            <div class="group">
+                <div class="overflow-hidden rounded-xl bg-gray-100 aspect-[4/5] flex items-center justify-center p-4 mb-3">
+                    <img src="./test1.jpg" class="w-full h-full object-contain hover:scale-[1.05] transition duration-500 cursor-zoom-in" alt="Side View">
+                </div>
+                <p class="text-sm font-medium text-gray-500">Aerodynamic profile designed for reduced drag on the road.</p>
             </div>
-            <div class="group overflow-hidden rounded-xl bg-gray-100 aspect-[4/5] flex items-center justify-center p-4">
-                <img src="./test2.jpg" class="w-full h-full object-contain hover:scale-[1.05] transition duration-500 cursor-zoom-in" alt="Top View">
+            <div class="group">
+                <div class="overflow-hidden rounded-xl bg-gray-100 aspect-[4/5] flex items-center justify-center p-4 mb-3">
+                    <img src="./test2.jpg" class="w-full h-full object-contain hover:scale-[1.05] transition duration-500 cursor-zoom-in" alt="Top View">
+                </div>
+                <p class="text-sm font-medium text-gray-500">Engineered breathable mesh upper keeps feet cool during long runs.</p>
             </div>
-            <div class="group overflow-hidden rounded-xl bg-gray-100 aspect-[4/5] flex items-center justify-center p-4">
-                <img src="./shoe3.webp" class="w-full h-full object-contain hover:scale-[1.05] transition duration-500 cursor-zoom-in" alt="Alternative View">
+            <div class="group">
+                <div class="overflow-hidden rounded-xl bg-gray-100 aspect-[4/5] flex items-center justify-center p-4 mb-3">
+                    <img src="./shoe3.webp" class="w-full h-full object-contain hover:scale-[1.05] transition duration-500 cursor-zoom-in" alt="Alternative View">
+                </div>
+                <p class="text-sm font-medium text-gray-500">Dynamic cushioning ensures energy return in every step.</p>
             </div>
         </div>
 
@@ -162,11 +171,13 @@
                 </button>
 
                 <div class="mt-12 space-y-6 border-t pt-8">
-                    <div class="group cursor-pointer">
-                        <h3 class="font-bold text-lg flex justify-between items-center uppercase text-sm">Delivery & Returns <i data-lucide="chevron-down" class="w-5 h-5"></i></h3>
+                    <div class="flex justify-between items-center group cursor-pointer">
+                        <span class="font-bold uppercase text-sm">Delivery & Returns</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5"></i>
                     </div>
-                    <div class="group cursor-pointer border-t pt-6">
-                        <h3 class="font-bold text-lg flex justify-between items-center uppercase text-sm">Reviews (452) <i data-lucide="star" class="w-5 h-5 fill-black"></i></h3>
+                    <div class="flex justify-between items-center group cursor-pointer border-t pt-6">
+                        <span class="font-bold uppercase text-sm">Reviews (452)</span>
+                        <i data-lucide="star" class="w-5 h-5 fill-black"></i>
                     </div>
                 </div>
             </div>
@@ -290,7 +301,7 @@
             <p class="text-gray-500 font-medium">Your bag is empty.</p>
         </div>
         <div class="hidden flex-1 p-6" id="cart-items">
-            <div class="flex gap-4">
+            <div class="flex gap-4 mb-6">
                 <img src="./test1.jpg" class="w-20 h-20 rounded object-cover border border-gray-200">
                 <div>
                     <h4 class="font-bold">Nike Pegasus 41</h4>
