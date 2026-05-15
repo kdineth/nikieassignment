@@ -315,15 +315,22 @@
                 <div class="flex-1 p-6 flex flex-col items-center justify-center text-center" id="empty-cart">
                     <p class="text-gray-500 font-medium">Your bag is empty.</p>
                 </div>
-                <div class="hidden p-6" id="cart-items">
+                
+                <div class="hidden p-6 space-y-8" id="cart-items">
                     <div class="flex gap-4">
-                        <img src="./test1.jpg" class="w-20 h-20 rounded object-cover border border-gray-200">
+                        <img src="./test1.jpg" class="w-24 h-24 rounded object-cover border border-gray-200">
                         <div>
                             <h4 class="font-bold text-lg">Nike Pegasus 41</h4>
                             <p class="text-gray-500 text-sm font-medium" id="cart-size-label">Size: </p>
                             <p class="text-gray-500 text-sm font-medium" id="cart-color-label">Color: </p>
                             <p class="mt-2 font-bold text-xl">£119.95</p>
                         </div>
+                    </div>
+
+                    <div class="border-t pt-6">
+                        <label for="cart-email" class="block text-xs font-bold uppercase tracking-widest mb-3">Contact Information</label>
+                        <input type="email" id="cart-email" placeholder="Email Address" class="w-full border border-gray-300 py-4 px-6 rounded-full focus:border-black outline-none transition" required>
+                        <p id="cart-email-error" class="text-red-600 text-xs mt-2 hidden font-medium">Please enter a valid email address.</p>
                     </div>
                 </div>
             </div>
@@ -338,7 +345,7 @@
         </div>
 
         <div class="p-6 border-t bg-gray-50 space-y-3" id="cart-footer">
-            <button id="payment-btn" class="hidden w-full bg-black text-white py-4 rounded-full font-bold uppercase hover:bg-gray-800 transition shadow-lg" onclick="showConfirmation()">Proceed to Payment</button>
+            <button id="payment-btn" class="hidden w-full bg-black text-white py-4 rounded-full font-bold uppercase hover:bg-gray-800 transition shadow-lg" onclick="handlePayment()">Proceed to Payment</button>
             <button id="close-drawer-btn" class="w-full border border-gray-300 py-4 rounded-full font-bold uppercase hover:bg-gray-100 transition" onclick="toggleCart()">Close Bag</button>
         </div>
     </div>
@@ -393,12 +400,12 @@
             document.getElementById('cart-size-label').innerText = `Size: ${selectedSize}`;
             document.getElementById('cart-color-label').innerText = `Color: ${selectedColor || 'Standard'}`;
 
-            // Show Items
+            // Show Product UI in sidebar
             document.getElementById('empty-cart').classList.add('hidden');
             document.getElementById('cart-items').classList.remove('hidden');
             document.getElementById('payment-btn').classList.remove('hidden');
             
-            // Ensure confirmation is hidden and product is visible
+            // Ensure product view is active, not confirmation
             document.getElementById('cart-content-main').classList.remove('hidden');
             document.getElementById('order-confirmed-view').classList.add('hidden');
             document.getElementById('close-drawer-btn').innerText = "Close Bag";
@@ -411,8 +418,21 @@
             toggleCart(true);
         }
 
-        function showConfirmation() {
-            // Swap content inside the sidebar
+        function handlePayment() {
+            const emailInput = document.getElementById('cart-email');
+            const emailError = document.getElementById('cart-email-error');
+            
+            // Basic validation
+            if (!emailInput.value || !emailInput.value.includes('@')) {
+                emailError.classList.remove('hidden');
+                emailInput.classList.add('border-red-500');
+                return;
+            } else {
+                emailError.classList.add('hidden');
+                emailInput.classList.remove('border-red-500');
+            }
+
+            // Success Transition
             document.getElementById('cart-content-main').classList.add('hidden');
             document.getElementById('payment-btn').classList.add('hidden');
             
