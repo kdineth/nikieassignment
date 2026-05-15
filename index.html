@@ -132,15 +132,6 @@
                 <p class="text-gray-500 font-medium mb-4">Men & Women’s Running Shoes.</p>
                 <div class="text-2xl font-medium mb-8">£119.95</div>
 
-                <div class="mb-8 p-4 bg-gray-50 rounded-2xl border-2 border-nike-volt flex items-center gap-4">
-                    <img src="sunglass.jpg" class="w-20 h-20 object-cover rounded-lg shadow-sm border border-gray-200" alt="Free Sunglasses">
-                    <div>
-                        <span class="block text-[10px] font-black uppercase text-nike-volt bg-black px-2 py-0.5 rounded w-fit mb-1">Limited Offer</span>
-                        <p class="text-sm font-bold leading-tight text-black">With every purchase we are giving away Nike Running Glasses.</p>
-                        <p class="text-[11px] text-gray-500 mt-1">Automatically added to bag.</p>
-                    </div>
-                </div>
-
                 <div class="mb-8">
                     <span class="font-bold block mb-4 uppercase text-xs tracking-widest">Select Color</span>
                     <div class="flex flex-wrap gap-4" id="color-selectors">
@@ -168,6 +159,20 @@
                         <button class="size-btn border rounded-md py-3 hover:border-black font-medium transition focus:outline-none" onclick="selectSize(this)">UK 12</button>
                     </div>
                     <p id="size-error" class="text-red-600 text-sm mt-2 hidden font-medium">Please select a size.</p>
+                </div>
+
+                <div class="mb-4 p-4 bg-gray-50 rounded-2xl border-2 border-nike-volt flex items-center gap-4">
+                    <img src="sunglass.jpg" class="w-20 h-20 object-cover rounded-lg shadow-sm border border-gray-200" alt="Free Sunglasses">
+                    <div>
+                        <span class="block text-[10px] font-black uppercase text-nike-volt bg-black px-2 py-0.5 rounded w-fit mb-1">Limited Offer</span>
+                        <p class="text-sm font-bold leading-tight text-black">With every purchase we are giving away Nike Running Glasses.</p>
+                        <p class="text-[11px] text-gray-500 mt-1">Automatically added to bag.</p>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <input type="email" id="checkout-email" placeholder="Enter your email to continue" class="w-full border border-gray-300 py-4 px-6 rounded-full focus:border-black outline-none transition" required>
+                    <p id="email-error" class="text-red-600 text-xs mt-2 hidden font-medium px-4">Please enter a valid email address.</p>
                 </div>
 
                 <button onclick="addToCart()" class="w-full bg-black text-white py-6 rounded-full font-bold text-lg hover:bg-gray-800 transition transform active:scale-95 mb-4 shadow-xl">
@@ -309,23 +314,36 @@
             <h2 class="text-xl font-black font-nike uppercase">Your Bag</h2>
             <button onclick="toggleCart()" class="p-2 hover:bg-gray-200 rounded-full transition"><i data-lucide="x" class="w-6 h-6"></i></button>
         </div>
-        <div class="flex-1 p-6 flex flex-col items-center justify-center text-center" id="empty-cart">
-            <p class="text-gray-500 font-medium">Your bag is empty.</p>
-        </div>
-        <div class="hidden flex-1 p-6" id="cart-items">
-            <div class="flex gap-4">
-                <img src="./test1.jpg" class="w-20 h-20 rounded object-cover border border-gray-200">
-                <div>
-                    <h4 class="font-bold">Nike Pegasus 41</h4>
-                    <p class="text-gray-500 text-sm" id="cart-details">Size: UK 9</p>
-                    <p class="mt-2 font-bold">£119.95</p>
+        
+        <div id="cart-content-main" class="flex-1 flex flex-col">
+            <div class="flex-1 p-6 flex flex-col items-center justify-center text-center" id="empty-cart">
+                <p class="text-gray-500 font-medium">Your bag is empty.</p>
+            </div>
+            <div class="hidden flex-1 p-6" id="cart-items">
+                <div class="flex gap-4">
+                    <img src="./test1.jpg" class="w-20 h-20 rounded object-cover border border-gray-200">
+                    <div>
+                        <h4 class="font-bold">Nike Pegasus 41</h4>
+                        <p class="text-gray-500 text-sm" id="cart-details">Size: UK 9</p>
+                        <p class="mt-2 font-bold">£119.95</p>
+                    </div>
                 </div>
             </div>
+            <div class="p-6 border-t bg-gray-50" id="cart-footer">
+                <button class="w-full bg-black text-white py-4 rounded-full font-bold uppercase hover:bg-gray-800 transition" onclick="toggleCart()">Close Bag</button>
+            </div>
         </div>
-        <div class="p-6 border-t bg-gray-50" id="cart-footer">
-            <button class="w-full bg-black text-white py-4 rounded-full font-bold uppercase hover:bg-gray-800 transition" onclick="toggleCart()">Close Bag</button>
+
+        <div id="order-confirmed-view" class="hidden flex-1 flex flex-col items-center justify-center p-8 text-center">
+            <div class="w-20 h-20 bg-white border-4 border-green-500 rounded-full flex items-center justify-center mb-6">
+                <i data-lucide="check" class="text-green-500 w-12 h-12 stroke-[4px]"></i>
+            </div>
+            <h2 class="text-3xl font-black font-nike uppercase mb-4">Order Confirmed</h2>
+            <p class="text-gray-500 text-lg leading-tight mb-12">Thank you! Your new Pegasus 41s are on the way.</p>
+            <button class="w-full max-w-[200px] border-2 border-black py-3 rounded-full font-bold uppercase hover:bg-black hover:text-white transition" onclick="toggleCart()">Close</button>
         </div>
     </div>
+    
     <div id="backdrop" class="fixed inset-0 bg-black/50 z-50 hidden backdrop-blur-sm" onclick="toggleCart()"></div>
 
     <script>
@@ -364,16 +382,35 @@
         }
 
         function addToCart() {
+            const emailInput = document.getElementById('checkout-email');
+            const emailError = document.getElementById('email-error');
+            const sizeError = document.getElementById('size-error');
+
+            // Reset errors
+            sizeError.classList.add('hidden');
+            emailError.classList.add('hidden');
+
+            // Validation
             if (!selectedSize) {
-                document.getElementById('size-error').classList.remove('hidden');
+                sizeError.classList.remove('hidden');
                 return;
             }
+
+            if (!emailInput.value || !emailInput.value.includes('@')) {
+                emailError.classList.remove('hidden');
+                emailInput.focus();
+                return;
+            }
+
+            // Update Cart Badge
             const badge = document.getElementById('cart-badge');
             badge.innerText = "1";
             badge.classList.remove('opacity-0');
-            document.getElementById('empty-cart').classList.add('hidden');
-            document.getElementById('cart-items').classList.remove('hidden');
-            document.getElementById('cart-details').innerText = `Size: ${selectedSize} | Color: ${selectedColor || 'Standard'}`;
+
+            // Switch to Order Confirmed View
+            document.getElementById('cart-content-main').classList.add('hidden');
+            document.getElementById('order-confirmed-view').classList.remove('hidden');
+            
             toggleCart(true);
         }
 
@@ -386,6 +423,11 @@
             } else {
                 drawer.classList.add('drawer-closed'); drawer.classList.remove('drawer-open');
                 backdrop.classList.add('hidden');
+                // Reset view when closing
+                setTimeout(() => {
+                    document.getElementById('cart-content-main').classList.remove('hidden');
+                    document.getElementById('order-confirmed-view').classList.add('hidden');
+                }, 300);
             }
         }
 
