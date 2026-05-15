@@ -161,18 +161,13 @@
                     <p id="size-error" class="text-red-600 text-sm mt-2 hidden font-medium">Please select a size.</p>
                 </div>
 
-                <div class="mb-4 p-4 bg-gray-50 rounded-2xl border-2 border-nike-volt flex items-center gap-4">
+                <div class="mb-6 p-4 bg-gray-50 rounded-2xl border-2 border-nike-volt flex items-center gap-4">
                     <img src="sunglass.jpg" class="w-20 h-20 object-cover rounded-lg shadow-sm border border-gray-200" alt="Free Sunglasses">
                     <div>
                         <span class="block text-[10px] font-black uppercase text-nike-volt bg-black px-2 py-0.5 rounded w-fit mb-1">Limited Offer</span>
                         <p class="text-sm font-bold leading-tight text-black">With every purchase we are giving away Nike Running Glasses.</p>
                         <p class="text-[11px] text-gray-500 mt-1">Automatically added to bag.</p>
                     </div>
-                </div>
-
-                <div class="mb-4">
-                    <input type="email" id="checkout-email" placeholder="Enter your email to continue" class="w-full border border-gray-300 py-4 px-6 rounded-full focus:border-black outline-none transition" required>
-                    <p id="email-error" class="text-red-600 text-xs mt-2 hidden font-medium px-4">Please enter a valid email address.</p>
                 </div>
 
                 <button onclick="addToCart()" class="w-full bg-black text-white py-6 rounded-full font-bold text-lg hover:bg-gray-800 transition transform active:scale-95 mb-4 shadow-xl">
@@ -323,22 +318,24 @@
                 <div class="flex gap-4">
                     <img src="./test1.jpg" class="w-20 h-20 rounded object-cover border border-gray-200">
                     <div>
-                        <h4 class="font-bold">Nike Pegasus 41</h4>
-                        <p class="text-gray-500 text-sm" id="cart-details">Size: UK 9</p>
-                        <p class="mt-2 font-bold">£119.95</p>
+                        <h4 class="font-bold text-lg">Nike Pegasus 41</h4>
+                        <p class="text-gray-500 text-sm font-medium" id="cart-size-label">Size: </p>
+                        <p class="text-gray-500 text-sm font-medium" id="cart-color-label">Color: </p>
+                        <p class="mt-2 font-bold text-xl">£119.95</p>
                     </div>
                 </div>
             </div>
-            <div class="p-6 border-t bg-gray-50" id="cart-footer">
-                <button class="w-full bg-black text-white py-4 rounded-full font-bold uppercase hover:bg-gray-800 transition" onclick="toggleCart()">Close Bag</button>
+            <div class="p-6 border-t bg-gray-50 space-y-3" id="cart-footer">
+                <button id="payment-btn" class="hidden w-full bg-black text-white py-4 rounded-full font-bold uppercase hover:bg-gray-800 transition shadow-lg" onclick="showConfirmation()">Proceed to Payment</button>
+                <button class="w-full border border-gray-300 py-4 rounded-full font-bold uppercase hover:bg-gray-100 transition" onclick="toggleCart()">Close Bag</button>
             </div>
         </div>
 
-        <div id="order-confirmed-view" class="hidden flex-1 flex flex-col items-center justify-center p-8 text-center">
+        <div id="order-confirmed-view" class="hidden flex-1 flex flex-col items-center justify-center p-8 text-center bg-white">
             <div class="w-20 h-20 bg-white border-4 border-green-500 rounded-full flex items-center justify-center mb-6">
                 <i data-lucide="check" class="text-green-500 w-12 h-12 stroke-[4px]"></i>
             </div>
-            <h2 class="text-3xl font-black font-nike uppercase mb-4">Order Confirmed</h2>
+            <h2 class="text-3xl font-black font-nike uppercase mb-4 tracking-tighter">Order Confirmed</h2>
             <p class="text-gray-500 text-lg leading-tight mb-12">Thank you! Your new Pegasus 41s are on the way.</p>
             <button class="w-full max-w-[200px] border-2 border-black py-3 rounded-full font-bold uppercase hover:bg-black hover:text-white transition" onclick="toggleCart()">Close</button>
         </div>
@@ -382,36 +379,34 @@
         }
 
         function addToCart() {
-            const emailInput = document.getElementById('checkout-email');
-            const emailError = document.getElementById('email-error');
             const sizeError = document.getElementById('size-error');
-
-            // Reset errors
             sizeError.classList.add('hidden');
-            emailError.classList.add('hidden');
 
-            // Validation
             if (!selectedSize) {
                 sizeError.classList.remove('hidden');
                 return;
             }
 
-            if (!emailInput.value || !emailInput.value.includes('@')) {
-                emailError.classList.remove('hidden');
-                emailInput.focus();
-                return;
-            }
+            // Update UI with selected data
+            document.getElementById('cart-size-label').innerText = `Size: ${selectedSize}`;
+            document.getElementById('cart-color-label').innerText = `Color: ${selectedColor || 'Standard'}`;
 
-            // Update Cart Badge
+            // Show item and payment button
+            document.getElementById('empty-cart').classList.add('hidden');
+            document.getElementById('cart-items').classList.remove('hidden');
+            document.getElementById('payment-btn').classList.remove('hidden');
+
+            // Update Badge
             const badge = document.getElementById('cart-badge');
             badge.innerText = "1";
             badge.classList.remove('opacity-0');
 
-            // Switch to Order Confirmed View
+            toggleCart(true);
+        }
+
+        function showConfirmation() {
             document.getElementById('cart-content-main').classList.add('hidden');
             document.getElementById('order-confirmed-view').classList.remove('hidden');
-            
-            toggleCart(true);
         }
 
         function toggleCart(forceOpen = false) {
@@ -423,7 +418,7 @@
             } else {
                 drawer.classList.add('drawer-closed'); drawer.classList.remove('drawer-open');
                 backdrop.classList.add('hidden');
-                // Reset view when closing
+                // Reset view after drawer animation completes
                 setTimeout(() => {
                     document.getElementById('cart-content-main').classList.remove('hidden');
                     document.getElementById('order-confirmed-view').classList.add('hidden');
