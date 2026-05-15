@@ -310,34 +310,36 @@
             <button onclick="toggleCart()" class="p-2 hover:bg-gray-200 rounded-full transition"><i data-lucide="x" class="w-6 h-6"></i></button>
         </div>
         
-        <div id="cart-content-main" class="flex-1 flex flex-col">
-            <div class="flex-1 p-6 flex flex-col items-center justify-center text-center" id="empty-cart">
-                <p class="text-gray-500 font-medium">Your bag is empty.</p>
-            </div>
-            <div class="hidden flex-1 p-6" id="cart-items">
-                <div class="flex gap-4">
-                    <img src="./test1.jpg" class="w-20 h-20 rounded object-cover border border-gray-200">
-                    <div>
-                        <h4 class="font-bold text-lg">Nike Pegasus 41</h4>
-                        <p class="text-gray-500 text-sm font-medium" id="cart-size-label">Size: </p>
-                        <p class="text-gray-500 text-sm font-medium" id="cart-color-label">Color: </p>
-                        <p class="mt-2 font-bold text-xl">£119.95</p>
+        <div class="flex-1 overflow-y-auto">
+            <div id="cart-content-main" class="flex flex-col h-full">
+                <div class="flex-1 p-6 flex flex-col items-center justify-center text-center" id="empty-cart">
+                    <p class="text-gray-500 font-medium">Your bag is empty.</p>
+                </div>
+                <div class="hidden p-6" id="cart-items">
+                    <div class="flex gap-4">
+                        <img src="./test1.jpg" class="w-20 h-20 rounded object-cover border border-gray-200">
+                        <div>
+                            <h4 class="font-bold text-lg">Nike Pegasus 41</h4>
+                            <p class="text-gray-500 text-sm font-medium" id="cart-size-label">Size: </p>
+                            <p class="text-gray-500 text-sm font-medium" id="cart-color-label">Color: </p>
+                            <p class="mt-2 font-bold text-xl">£119.95</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="p-6 border-t bg-gray-50 space-y-3" id="cart-footer">
-                <button id="payment-btn" class="hidden w-full bg-black text-white py-4 rounded-full font-bold uppercase hover:bg-gray-800 transition shadow-lg" onclick="showConfirmation()">Proceed to Payment</button>
-                <button class="w-full border border-gray-300 py-4 rounded-full font-bold uppercase hover:bg-gray-100 transition" onclick="toggleCart()">Close Bag</button>
+
+            <div id="order-confirmed-view" class="hidden h-full flex flex-col items-center justify-center p-8 text-center">
+                <div class="w-20 h-20 bg-white border-4 border-green-500 rounded-full flex items-center justify-center mb-6">
+                    <i data-lucide="check" class="text-green-500 w-12 h-12 stroke-[4px]"></i>
+                </div>
+                <h2 class="text-3xl font-black font-nike uppercase mb-4 tracking-tighter">Order Confirmed</h2>
+                <p class="text-gray-500 text-lg leading-tight mb-8">Thank you! Your new Pegasus 41s are on the way.</p>
             </div>
         </div>
 
-        <div id="order-confirmed-view" class="hidden flex-1 flex flex-col items-center justify-center p-8 text-center bg-white">
-            <div class="w-20 h-20 bg-white border-4 border-green-500 rounded-full flex items-center justify-center mb-6">
-                <i data-lucide="check" class="text-green-500 w-12 h-12 stroke-[4px]"></i>
-            </div>
-            <h2 class="text-3xl font-black font-nike uppercase mb-4 tracking-tighter">Order Confirmed</h2>
-            <p class="text-gray-500 text-lg leading-tight mb-12">Thank you! Your new Pegasus 41s are on the way.</p>
-            <button class="w-full max-w-[200px] border-2 border-black py-3 rounded-full font-bold uppercase hover:bg-black hover:text-white transition" onclick="toggleCart()">Close</button>
+        <div class="p-6 border-t bg-gray-50 space-y-3" id="cart-footer">
+            <button id="payment-btn" class="hidden w-full bg-black text-white py-4 rounded-full font-bold uppercase hover:bg-gray-800 transition shadow-lg" onclick="showConfirmation()">Proceed to Payment</button>
+            <button id="close-drawer-btn" class="w-full border border-gray-300 py-4 rounded-full font-bold uppercase hover:bg-gray-100 transition" onclick="toggleCart()">Close Bag</button>
         </div>
     </div>
     
@@ -387,14 +389,19 @@
                 return;
             }
 
-            // Update UI with selected data
+            // Populate Cart Details
             document.getElementById('cart-size-label').innerText = `Size: ${selectedSize}`;
             document.getElementById('cart-color-label').innerText = `Color: ${selectedColor || 'Standard'}`;
 
-            // Show item and payment button
+            // Show Items
             document.getElementById('empty-cart').classList.add('hidden');
             document.getElementById('cart-items').classList.remove('hidden');
             document.getElementById('payment-btn').classList.remove('hidden');
+            
+            // Ensure confirmation is hidden and product is visible
+            document.getElementById('cart-content-main').classList.remove('hidden');
+            document.getElementById('order-confirmed-view').classList.add('hidden');
+            document.getElementById('close-drawer-btn').innerText = "Close Bag";
 
             // Update Badge
             const badge = document.getElementById('cart-badge');
@@ -405,8 +412,14 @@
         }
 
         function showConfirmation() {
+            // Swap content inside the sidebar
             document.getElementById('cart-content-main').classList.add('hidden');
+            document.getElementById('payment-btn').classList.add('hidden');
+            
             document.getElementById('order-confirmed-view').classList.remove('hidden');
+            document.getElementById('close-drawer-btn').innerText = "Close";
+            
+            lucide.createIcons();
         }
 
         function toggleCart(forceOpen = false) {
@@ -418,11 +431,6 @@
             } else {
                 drawer.classList.add('drawer-closed'); drawer.classList.remove('drawer-open');
                 backdrop.classList.add('hidden');
-                // Reset view after drawer animation completes
-                setTimeout(() => {
-                    document.getElementById('cart-content-main').classList.remove('hidden');
-                    document.getElementById('order-confirmed-view').classList.add('hidden');
-                }, 300);
             }
         }
 
